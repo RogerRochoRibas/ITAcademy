@@ -1,0 +1,86 @@
+/*General*/
+.container {
+    display:flex;
+    background-color:rgb(29, 29, 29)
+}
+.containerColumn {
+    flex-direction: column;
+}
+.containerRow {
+    flex-direction:row;
+}
+.section {
+    background-color:rgb(209, 209, 209);
+    display:flex;
+}
+.element {
+    background-color: rgb(255, 162, 162);
+}
+.element100 {
+    width:100%;
+}
+div {
+    margin:10px 1%;
+    padding:10px;
+}
+/*Primer Container
+Sección 1*/
+#section1 {
+    background-color:rgb(82, 94, 105);
+}
+#section1 div {
+    background-color:rgb(255, 93, 93);
+}
+#element1 {
+    flex:1;
+}
+#element2 {
+    flex:5;
+}
+#element3 {
+    flex:1;
+}
+/*Sección 2*/
+#section2 {
+    background-color:rgb(255, 155, 88)
+}
+#section2 div {
+    background-color: rgb(255, 255, 100);
+}
+/*Segundo Container
+Sección 3*/
+#section3 {
+    width: 67%;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    background-color:rgb(13, 71, 90);
+}
+.element3-1234 {
+    background-color: royalblue;
+    box-sizing: border-box;
+    width:48%;
+    margin:10xp auto;
+}
+#element2-5 {
+    background-color: lightsteelblue;
+}
+/*Sección 4*/
+#section4 {
+    width: 33%;
+    box-sizing: border-box;
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: rgb(255, 93, 93);
+}
+#section4 div {
+    width:93%;
+    background-color:khaki;
+}
+
+/*Tercer Container
+Sección 5*/
+#section5 {
+    background-color:goldenrod;
+}
