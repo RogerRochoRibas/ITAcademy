@@ -60,7 +60,7 @@ Sección 3*/
     width:48%;
     margin:10xp auto;
 }
-#element2-5 {
+#element3-5 {
     background-color:lightsteelblue;
 }
 /*Sección 4*/
@@ -83,12 +83,33 @@ Sección 5*/
     background-color:goldenrod;
 }
 /*Media querys tablet*/
-@media (min-width:481px) and (max-width:1024px){
+@media (max-width:1024px){
     #container2 {
         background-color:rgb(244, 234, 96);
         flex-direction:column;
     }
     #section3,#section4 {
         width:auto;
+    }
+}
+/*Media querys mobile*/
+@media (max-width:480px) {
+    #section1 {
+        flex-direction:column;
+    }
+    .section {
+        padding:10px;
+        margin:10px;
+    }
+    .element3-1234 {
+        flex-direction:column;
+        width:100%;
+        background-color:rgb(75, 109, 109);
+    }
+    #section4 div {
+        background-color:rgb(255, 183, 27);
+    }
+    #element3-5 {
+        margin-top: -10px;
     }
 }
