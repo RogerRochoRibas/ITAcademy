@@ -1,12 +1,10 @@
 /*General*/
 .container {
     display:flex;
-    background-color:rgb(29, 29, 29)
+    background-color:rgb(29, 29, 29);
+    flex-direction:column;
 }
-.containerColumn {
-    flex-direction: column;
-}
-.containerRow {
+#container2 {
     flex-direction:row;
 }
 .section {
@@ -14,14 +12,14 @@
     display:flex;
 }
 .element {
-    background-color: rgb(255, 162, 162);
+    background-color:rgb(255, 162, 162);
 }
 .element100 {
     width:100%;
 }
 div {
     margin:10px 1%;
-    padding:10px;
+    padding:10px 1%;
 }
 /*Primer Container
 Sección 1*/
@@ -45,43 +43,52 @@ Sección 1*/
     background-color:rgb(255, 155, 88)
 }
 #section2 div {
-    background-color: rgb(255, 255, 100);
+    background-color:rgb(255, 255, 100);
 }
 /*Segundo Container
 Sección 3*/
 #section3 {
-    width: 67%;
-    display: flex;
-    flex-wrap: wrap;
-    box-sizing: border-box;
+    width:67%;
+    display:flex;
+    flex-wrap:wrap;
+    box-sizing:border-box;
     background-color:rgb(13, 71, 90);
 }
 .element3-1234 {
-    background-color: royalblue;
-    box-sizing: border-box;
+    background-color:royalblue;
+    box-sizing:border-box;
     width:48%;
     margin:10xp auto;
 }
 #element2-5 {
-    background-color: lightsteelblue;
+    background-color:lightsteelblue;
 }
 /*Sección 4*/
 #section4 {
-    width: 33%;
-    box-sizing: border-box;
+    width:33%;
+    box-sizing:border-box;
     display:flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    background-color: rgb(255, 93, 93);
+    flex-wrap:wrap;
+    flex-direction:column;
+    background-color:rgb(255, 93, 93);
 }
 /*El width 100% hacía overflow*/
 #section4 div {
     width:calc(96%-5px);
     background-color:khaki;
 }
-
 /*Tercer Container
 Sección 5*/
 #section5 {
     background-color:goldenrod;
+}
+/*Media querys tablet*/
+@media (min-width:481px) and (max-width:1024px){
+    #container2 {
+        background-color:rgb(244, 234, 96);
+        flex-direction:column;
+    }
+    #section3,#section4 {
+        width:auto;
+    }
 }
