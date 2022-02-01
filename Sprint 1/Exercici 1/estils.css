@@ -74,8 +74,9 @@ Sección 3*/
     flex-direction: column;
     background-color: rgb(255, 93, 93);
 }
+/*El width 100% hacía overflow*/
 #section4 div {
-    width:93%;
+    width:calc(96%-5px);
     background-color:khaki;
 }
 
