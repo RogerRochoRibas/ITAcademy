@@ -1,13 +1,5 @@
 /*Ejercicio 2*/
 
-.navbar-light .navbar-toggler {
-    border-color: white;
-}
-
-.navbar-toggler:focus {
-    box-shadow: 0 0 0 0rem;
-}
-
 button.active {
     border-bottom: 2px solid rgb(255, 0, 0) !important;
     border-radius: 0px !important;
@@ -22,4 +14,25 @@ button.active {
 
 .card-footer {
     border-width: 0px;
+}
+
+
+/*Ejercicio 4*/
+
+.accordion-button::after {
+    background-image: url("../img/icon-arrow.svg")
+}
+
+.accordion-button:not(.collapsed) {
+    color: black;
+}
+
+.accordion-button:focus {
+    -webkit-box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+}
+
+.accordion-item {
+    border-left-color: rgba(0, 0, 0, 0) !important;
+    border-right-color: rgba(0, 0, 0, 0) !important;
 }
