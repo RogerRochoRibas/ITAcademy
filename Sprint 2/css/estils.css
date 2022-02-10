@@ -1,6 +1,25 @@
 /*Ejercicio 2*/
 
+.navbar-light .navbar-toggler {
+    border-color: white;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0rem;
+}
+
 button.active {
     border-bottom: 2px solid rgb(255, 0, 0) !important;
     border-radius: 0px !important;
+}
+
+
+/*Ejercicio 3*/
+
+.card-body {
+    border-width: 0px;
+}
+
+.card-footer {
+    border-width: 0px;
 }
