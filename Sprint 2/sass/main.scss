@@ -10,6 +10,21 @@ $navbar-toggler-focus-width:0rem;
 
 $card-cap-bg: white !important;
 
+/*Ejercicio 7*/
+
+.card:nth-child(1) {
+    align-self: start !important
+}
+
+.card:nth-child(2) {
+    align-self: center !important
+}
+
+.card:nth-child(3) {
+    align-self: end !important
+}
+
+
 /*Import*/
 
 @import '../node_modules/bootstrap/scss/bootstrap.scss'
