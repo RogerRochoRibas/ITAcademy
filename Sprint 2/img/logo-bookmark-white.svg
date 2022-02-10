@@ -1,0 +1,17 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 25" width="148" height="25">
+	<title>logo-bookmark-svg</title>
+	<defs>
+		<image  width="119" height="25" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHcAAAAZCAMAAAA8GUGSAAAAAXNSR0IB2cksfwAAAOpQTFRFAAAA5OXo9fb3+fn6+vr6+fr6+fn65+fqxcfNoaOvrK6409Ta8vL0////3N3iw8XMnaCsoaSvy8zT5+fqq623y83T8/P1trjBxMXNtrjBlZil3d7i4OHlw8TM+fn6pqiz/Pz8/v7+yMnQxcbO/v7+vb7Hq624oaSv/Pz89vb33d7i/Pz9s7W+sLK81NXa7/Dx3N3i09Xa29zg5+jrmZyosLK88/P16+zus7W/vL7GmZuopqiz4OHl+/v7+Pj5/Pz89vb37/Dy+fn67u7wm56qnZ+r2NnelZil4OHk5ebp8/T2/v7/+/v85ufqhhCe2wAAAE50Uk5TAPX7/P39/eVZI5vv/v/221dw5vub5/7A3L8f9s91/4f8/jV3/8+cbvvvr/+Pr+/Ql6Da+zyu4+onzjqGUv39/v3S9u0fVacdTvjq//us8OG+nwAAAqBJREFUeJztlFm30jAQx8d9af+lAboQVC56ATd61eaquO+4fv+v48wkKRfwHF988jAPbSaZyS+ZJUQHOch/KOfOX7h46fKVq167dj1JkfXyuGr6A6T9oY7zJNH5Qv8GQDArgcqPaqD2owoig5ElNTX+N7YdF0FuiHLzVtB6umaToGb5xr32FOF6xgSRa1Me2jNc9rTRMU9RdvdR7tHRlL+3ie4cA0lVzdIAHvOJq6rKgLRzrwJOuKnuUHTcuZDmkbswk76uqKMdbGGZe5e/94D7RA+Ah/GeE/X1914qS91564YiVxkWHbdB1kcWufLLxFodx/FEW9wT4BE9Bp74ST5cQtSGPYh6gFP3vMsRay0Kf6jWcx1wOhTLDTeJ3HoHy9zpyclTiNkz4HmYXbHO5sOg8o5L0Zeco1AarNXKGKMuPZdZL/j2sw33ZQwUB7CgHa6XV0Sv8SbOskPO5ouNVeUjq5kO3EnJp+EITEKcWwlSH4PAVSkd7TjucKdEb/Hu71z0Oy4Hb0AztOS5fILVYrHS0ojcJjQCys5xK7/vgQ/0Efj05zh/luyI+7yJeQrZziXGnlvHK9Seawp/BC0F20iq9rhybfoCjPzkOpV0tD5kpHVlxX1GrkTqIlcsJMeeW0autLDk15Y+uJISddzvo69aWN/CDddZbNXeWvTTTR/JK5F13CW0rZTLHVYZlqVGROvK+OBuO+7kF985Q3zkbDTqpeFtkHdjNRoNJE7de1V075XR3p0HbhGfqlL29/U80+BuO+7XFYPboGkvkC2COnbdscm2+vdajTJUneueZm0vz2Xb1O04Bpn+4H2Pf/4K6rxo0cxcXDV1g3Gh1UF5o9VJpmmYYI3h6zmjBWuc6MFLR84owoUlG5SzGT7IQf6Z/AZTOU7KP8m1jgAAAABJRU5ErkJggg=="/>
+	</defs>
+	<style>
+		.s0 { fill: #5267df } 
+		.s1 { fill: #ffffff } 
+	</style>
+	<g id="Layer">
+		<use id="Layer" href="#img1" x="29" y="0" />
+		<g id="Layer">
+			<path id="Layer" class="s0" d="m12.5 25c-6.9 0-12.5-5.6-12.5-12.5c0-6.9 5.6-12.5 12.5-12.5c6.9 0 12.5 5.6 12.5 12.5c0 6.9-5.6 12.5-12.5 12.5z" />
+			<path id="Layer" fill-rule="evenodd" class="s1" d="m9.2 8.2q0.1-0.3 0.4-0.6q0.3-0.3 0.6-0.4q0.4-0.2 0.8-0.2h3.1q0.4 0 0.7 0.2q0.4 0.1 0.7 0.4q0.3 0.3 0.4 0.6q0.2 0.4 0.2 0.8v10l-3.6-3.4l-3.5 3.4v-10q0-0.4 0.2-0.8z" />
+		</g>
+	</g>
+</svg>

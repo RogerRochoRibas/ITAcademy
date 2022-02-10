@@ -36,3 +36,26 @@ button.active {
     border-left-color: rgba(0, 0, 0, 0) !important;
     border-right-color: rgba(0, 0, 0, 0) !important;
 }
+
+
+/*Ejercicio 5*/
+
+.was-validated .form-control:invalid {
+    background-image: url(/img/icon-error.svg);
+}
+
+.valid-feedback {
+    background-color: #279223;
+    color: #ffffff;
+    font-weight: bold;
+    margin-top: 0;
+    border-radius: 5px;
+}
+
+.invalid-feedback {
+    background-color: #c2433a;
+    color: #ffffff;
+    font-weight: bold;
+    margin-top: 0;
+    border-radius: 5px;
+}
