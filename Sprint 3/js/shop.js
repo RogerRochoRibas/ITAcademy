@@ -64,6 +64,7 @@ function buy(buttonID) {
         if (buttonID == products[i].id) {
             // 2. Add found product to the cartList array
             cartList.push(products[i]);
+            console.log(cartList);
         }
     }
 }
@@ -77,6 +78,11 @@ function cleanCart() {
 // Exercise 3
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
+    total = 0;
+    for (let i = 0; i < cartList.length; i++) {
+        total = total + cartList[i].price;
+        console.log(total)
+    }
 }
 
 // Exercise 4
