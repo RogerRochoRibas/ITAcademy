@@ -112,6 +112,25 @@ function generateCart() {
 // Exercise 5
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
+    for (let i = 0; i < cart.length; i++) {
+        // Select the product we are working on in this loop (specificProduct)
+        var specificProduct = cart[i];
+        // Reset values in case the cart is modified and products are deleted from it
+        specificProduct.subtotalWithDiscount = []
+            // If the product is cooking oil, and there are 3 or more, calculate price subtotalWithDiscount (quantity * 10)
+        if (specificProduct.name == "cooking oil") {
+            if (specificProduct.quantity >= 3) {
+                specificProduct.subtotalWithDiscount = specificProduct.quantity * 10;
+            }
+        }
+        // If the product is Pasta, and there are 10 or more, calculate subtotalWithDiscount (quantity * price * 2/3)
+        if (specificProduct.name == "Pasta") {
+            if (specificProduct.quantity >= 10) {
+                specificProduct.subtotalWithDiscount = specificProduct.quantity * specificProduct.price * 2 / 3;
+                console.log("Total price is: ", specificProduct.subtotalWithDiscount)
+            }
+        }
+    }
 }
 
 
