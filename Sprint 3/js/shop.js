@@ -81,14 +81,32 @@ function calculateTotal() {
     total = 0;
     for (let i = 0; i < cartList.length; i++) {
         total = total + cartList[i].price;
-        console.log(total)
     }
+    console.log(total)
 }
 
 // Exercise 4
 function generateCart() {
     // Using the "cartlist" array that contains all the items in the shopping cart, 
     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
+    // We empty cart so running the function several times wont add more items each time
+    cart.length = 0;
+    console.log("cartList inicial: ", cartList)
+    for (let i = 0; i < cartList.length; i++) {
+        // Select the product we are working on in this loop (specificProduct)
+        var specificProduct = cartList[i];
+        // If the product is already in cart(cart.includes), find it(cart.find), store it in productExists and increase quantity
+        if (cart.includes(specificProduct)) {
+            var productExists = cart.find(x => x.id == specificProduct.id);
+            productExists.quantity++
+        }
+        // If the product is not in cart(!cart.includes), set quantity to 1 and add it(cart.push) to the cart
+        if (!cart.includes(specificProduct)) {
+            specificProduct.quantity = 1;
+            cart.push(specificProduct)
+        }
+    }
+    console.log("cart final: ", cart)
 }
 
 // Exercise 5
