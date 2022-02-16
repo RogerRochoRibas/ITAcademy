@@ -138,6 +138,8 @@ function applyPromotionsCart() {
     }
 }
 
+
+
 // ** Nivell II **
 
 // Exercise 7
@@ -145,9 +147,10 @@ function applyPromotionsCart() {
 function addToCart(buttonID) {
     // Refactor previous code in order to simplify it 
     // 1. Loop for to the array products to get the item to add to cart
+    // Find the product we are adding in the products list
     for (let i = 0; i < products.length; i++) {
         if (buttonID == products[i].id) {
-            // Select the product we are working on in this loop (specificProduct)
+            // Select the product we are working on and make it a variable (specificProduct)
             var specificProduct = products[i];
             // 2. Add found product to the cart array or update its quantity in
             // If the product is already in cart(cart.includes), find it(cart.find), store it in productExists and increase quantity in case it has been added previously.
@@ -166,9 +169,24 @@ function addToCart(buttonID) {
 }
 
 // Exercise 8
-function removeFromCart(id) {
-    // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cartList array
+function removeFromCart(removeId) {
+    // Loop to get the item to remove from cart
+    for (let i = 0; i < cart.length; i++) {
+        if (removeId == cart[i].id) {
+            var specificProduct = cart[i];
+            // If there is only one in cart
+            if (specificProduct.quantity == 1) {
+                // Remove the product from the cartList array
+                cart.splice(i, 1)
+            }
+            // If there are more than one in cart
+            if (specificProduct.quantity > 1) {
+                // Reduce quantity by 1
+                specificProduct.quantity = specificProduct.quantity - 1
+            }
+        }
+    }
+    console.log("cart final: ", cart)
 }
 
 // Exercise 9
