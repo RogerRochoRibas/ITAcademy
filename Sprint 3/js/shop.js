@@ -86,21 +86,22 @@ function calculateTotal() {
 }
 
 // Exercise 4
+
 function generateCart() {
     // Using the "cartlist" array that contains all the items in the shopping cart, 
     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
-    // We empty cart so running the function several times wont add more items each time
+    //We empty cart so running the function several times wont add more items each time
     cart.length = 0;
     console.log("cartList inicial: ", cartList)
     for (let i = 0; i < cartList.length; i++) {
-        // Select the product we are working on in this loop (specificProduct)
+        //Select the product we are working on in this loop (specificProduct)
         var specificProduct = cartList[i];
-        // If the product is already in cart(cart.includes), find it(cart.find), store it in productExists and increase quantity
+        //If the product is already in cart(cart.includes), find it(cart.find), store it in productExists and increase quantity
         if (cart.includes(specificProduct)) {
             var productExists = cart.find(x => x.id == specificProduct.id);
             productExists.quantity++
         }
-        // If the product is not in cart(!cart.includes), set quantity to 1 and add it(cart.push) to the cart
+        //If the product is not in cart(!cart.includes), set quantity to 1 and add it(.push) to the cart
         if (!cart.includes(specificProduct)) {
             specificProduct.quantity = 1;
             cart.push(specificProduct)
@@ -110,37 +111,58 @@ function generateCart() {
 }
 
 // Exercise 5
+
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
     for (let i = 0; i < cart.length; i++) {
-        // Select the product we are working on in this loop (specificProduct)
+        //Select the product we are working on in this loop (specificProduct)
         var specificProduct = cart[i];
-        // Reset values in case the cart is modified and products are deleted from it
+        //Resetear valor por si se modifica el cart y se recalcula
         specificProduct.subtotalWithDiscount = []
-            // If the product is cooking oil, and there are 3 or more, calculate price subtotalWithDiscount (quantity * 10)
         if (specificProduct.name == "cooking oil") {
+            console.log("It is cooking oil")
             if (specificProduct.quantity >= 3) {
+                console.log("There are 3 or more")
                 specificProduct.subtotalWithDiscount = specificProduct.quantity * 10;
-            }
+                console.log("Total price is: ", specificProduct.subtotalWithDiscount)
+            } else(console.log("But there are not 3 or more"))
         }
-        // If the product is Pasta, and there are 10 or more, calculate subtotalWithDiscount (quantity * price * 2/3)
         if (specificProduct.name == "Pasta") {
+            console.log("It is pasta")
             if (specificProduct.quantity >= 10) {
+                console.log("There are 10 or more")
                 specificProduct.subtotalWithDiscount = specificProduct.quantity * specificProduct.price * 2 / 3;
                 console.log("Total price is: ", specificProduct.subtotalWithDiscount)
-            }
+            } else(console.log("But there are not 10 or more"))
         }
     }
 }
 
-
 // ** Nivell II **
 
 // Exercise 7
-function addToCart(id) {
+
+function addToCart(buttonID) {
     // Refactor previous code in order to simplify it 
     // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cart array or update its quantity in case it has been added previously.
+    for (let i = 0; i < products.length; i++) {
+        if (buttonID == products[i].id) {
+            // Select the product we are working on in this loop (specificProduct)
+            var specificProduct = products[i];
+            // 2. Add found product to the cart array or update its quantity in
+            // If the product is already in cart(cart.includes), find it(cart.find), store it in productExists and increase quantity in case it has been added previously.
+            if (cart.includes(specificProduct)) {
+                var productExists = cart.find(x => x.id == specificProduct.id);
+                productExists.quantity++
+            }
+            // If the product is not in cart(!cart.includes), set quantity to 1 and add it(.push) to the cart
+            if (!cart.includes(specificProduct)) {
+                specificProduct.quantity = 1;
+                cart.push(specificProduct)
+            }
+        }
+    }
+    console.log("cart final: ", cart)
 }
 
 // Exercise 8
