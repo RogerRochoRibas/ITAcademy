@@ -89,8 +89,8 @@ function calculateTotal() {
 
 function generateCart() {
     // Using the "cartlist" array that contains all the items in the shopping cart, 
-    // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
-    //We empty cart so running the function several times wont add more items each time
+    // Generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
+    // We empty cart so running the function several times wont add more items each time
     cart.length = 0;
     console.log("cartList inicial: ", cartList)
     for (let i = 0; i < cartList.length; i++) {
@@ -117,7 +117,7 @@ function applyPromotionsCart() {
     for (let i = 0; i < cart.length; i++) {
         //Select the product we are working on in this loop (specificProduct)
         var specificProduct = cart[i];
-        //Resetear valor por si se modifica el cart y se recalcula
+        //Reset value in case the cart is modified and calculated again
         specificProduct.subtotalWithDiscount = []
         if (specificProduct.name == "cooking oil") {
             console.log("It is cooking oil")
@@ -190,6 +190,22 @@ function removeFromCart(removeId) {
 }
 
 // Exercise 9
+var ul = document.getElementById("showCart");
+
 function printCart() {
-    // Fill the shopping cart modal manipulating the shopping cart dom
-}
+    // Reset the content of showCart so it won't stack if the function is called again
+    ul.innerHTML = "Your Cart:"
+        // Fill the shopping cart modal manipulating the shopping cart dom
+    for (let i = 0; i < cart.length; i++) {
+        // Select the item we will be adding
+        var productName = cart[i].name;
+        var productQuantity = cart[i].quantity;
+        var li = document.createElement('li');
+        // This does nothing right now but will help later with styling
+        // Create the content of the li
+        var productLine = document.createTextNode(productQuantity + ' ' + productName);
+        // Create the li and include it in the list
+        li.appendChild(productLine);
+        ul.appendChild(li);
+    }
+};
