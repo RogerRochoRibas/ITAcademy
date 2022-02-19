@@ -1,8 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins');
-
-body {
-    font-family: Poppins;
-}
-#errorPassword, #errorName, #errorPhone {
-    display: none;
-}
+    @import url('https://fonts.googleapis.com/css?family=Poppins');
+    body {
+        font-family: Poppins;
+        color: rgb(165, 0, 16) !important;
+    }
+    
+    form {
+        color: rgb(34, 34, 34)
+    }
+    
+    #errorPassword,
+    #errorName,
+    #errorPhone,
+    #errorAddress,
+    #errorLastName,
+    #errorEmail {
+        display: none;
+    }

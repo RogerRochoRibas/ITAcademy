@@ -1,49 +1,49 @@
 // If you have time, you can move this variable "products" to a json file and load the data in this js. It will look more professional
 var products = [{
         id: 1,
-        name: 'cooking oil',
-        price: 10.5,
+        name: 'Nian Gao',
+        price: 10,
         type: 'grocery'
     },
     {
         id: 2,
-        name: 'Pasta',
-        price: 6.25,
+        name: 'Mochi',
+        price: 23,
         type: 'grocery'
     }, {
         id: 3,
-        name: 'Instant cupcake mixture',
-        price: 5,
+        name: 'Mixed Mitai',
+        price: 10,
         type: 'grocery'
     }, {
         id: 4,
-        name: 'All-in-one',
-        price: 260,
+        name: 'Skin Care',
+        price: 39,
         type: 'beauty'
     }, {
         id: 5,
-        name: 'Zero Make-up Kit',
-        price: 20.5,
+        name: 'Serum',
+        price: 24,
         type: 'beauty'
     }, {
         id: 6,
-        name: 'Lip Tints',
-        price: 12.75,
+        name: 'Lipstick',
+        price: 12,
         type: 'beauty'
     }, {
         id: 7,
-        name: 'Lawn Dress',
-        price: 15,
+        name: 'Red Kimono',
+        price: 49,
         type: 'clothes'
     }, {
         id: 8,
-        name: 'Lawn-Chiffon Combo',
-        price: 19.99,
+        name: 'Blue Kimono',
+        price: 49,
         type: 'clothes'
     }, {
         id: 9,
-        name: 'Toddler Frock',
-        price: 9.99,
+        name: 'White Kimono',
+        price: 49,
         type: 'clothes'
     }
 ]
@@ -73,6 +73,7 @@ function buy(buttonID) {
 
 function cleanCart() {
     cartList.length = 0;
+    printCart();
 }
 
 // Exercise 3
@@ -89,8 +90,8 @@ function calculateTotal() {
 
 function generateCart() {
     // Using the "cartlist" array that contains all the items in the shopping cart, 
-    // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
-    //We empty cart so running the function several times wont add more items each time
+    // Generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
+    // We empty cart so running the function several times wont add more items each time
     cart.length = 0;
     console.log("cartList inicial: ", cartList)
     for (let i = 0; i < cartList.length; i++) {
@@ -117,23 +118,35 @@ function applyPromotionsCart() {
     for (let i = 0; i < cart.length; i++) {
         //Select the product we are working on in this loop (specificProduct)
         var specificProduct = cart[i];
-        //Resetear valor por si se modifica el cart y se recalcula
+        //Reset value in case the cart is modified and calculated again
         specificProduct.subtotalWithDiscount = []
-        if (specificProduct.name == "cooking oil") {
-            console.log("It is cooking oil")
+        if (specificProduct.id == 1) {
+            // If there are enough products for discount, modify price
             if (specificProduct.quantity >= 3) {
-                console.log("There are 3 or more")
-                specificProduct.subtotalWithDiscount = specificProduct.quantity * 10;
-                console.log("Total price is: ", specificProduct.subtotalWithDiscount)
-            } else(console.log("But there are not 3 or more"))
+                specificProduct.price = 8;
+                specificProduct.subtotalWithDiscount = specificProduct.quantity * specificProduct.price;
+                // If there are not enough products for discount, set the price back to normal
+            } else {
+                specificProduct.price = 10;
+                specificProduct.subtotalWithDiscount = specificProduct.quantity * specificProduct.price
+            }
         }
-        if (specificProduct.name == "Pasta") {
-            console.log("It is pasta")
+        if (specificProduct.id == 2) {
+            // If there are enough products for discount, modify price
             if (specificProduct.quantity >= 10) {
-                console.log("There are 10 or more")
-                specificProduct.subtotalWithDiscount = specificProduct.quantity * specificProduct.price * 2 / 3;
-                console.log("Total price is: ", specificProduct.subtotalWithDiscount)
-            } else(console.log("But there are not 10 or more"))
+                specificProduct.price = 15.30;
+                specificProduct.subtotalWithDiscount = specificProduct.quantity * specificProduct.price;
+                // If there are not enough products for discount, set the price back to normal
+            } else {
+                specificProduct.price = 23;
+                specificProduct.subtotalWithDiscount = specificProduct.quantity * specificProduct.price
+            }
+        }
+        // If the products are not discounted, calculate total price as normal
+        if (specificProduct.id !== 1) {
+            if (specificProduct.id !== 2) {
+                specificProduct.subtotalWithDiscount = specificProduct.quantity * specificProduct.price
+            }
         }
     }
 }
@@ -165,7 +178,7 @@ function addToCart(buttonID) {
             }
         }
     }
-    console.log("cart final: ", cart)
+    printCart()
 }
 
 // Exercise 8
@@ -186,10 +199,52 @@ function removeFromCart(removeId) {
             }
         }
     }
-    console.log("cart final: ", cart)
+    printCart();
 }
 
 // Exercise 9
+var ul = document.getElementById("showCart");
+
 function printCart() {
+    // Reset the content of showCart so it won't stack if the function is called again
+    ul.innerHTML = ''
+    var totalCost = 0;
+    // Calculate prices
+    applyPromotionsCart()
+    var totalPrice = document.getElementById('totalPrice');
+    totalPrice.innerHTML = '';
     // Fill the shopping cart modal manipulating the shopping cart dom
+    for (let i = 0; i < cart.length; i++) {
+        // Select the item we will be adding
+        var productName = cart[i].name;
+        var productQuantity = cart[i].quantity;
+        var productID = cart[i].id;
+        var productCost = cart[i].subtotalWithDiscount;
+        totalCost = totalCost + productCost;
+        // Create the li for the item
+        var li = document.createElement('li');
+        li.setAttribute('class', 'align-middle d-flex')
+        var p = document.createElement('p');
+        p.setAttribute('class', 'my-auto mx-3')
+            // Button to increase units
+        var increaseButton = document.createElement('button');
+        increaseButton.setAttribute('onClick', 'addToCart(' + productID + ')');
+        increaseButton.setAttribute('class', 'btn btn-warning m-1 w-auto');
+        increaseButton.appendChild(document.createTextNode('+'));
+        // Button to decrease units
+        var decreaseButton = document.createElement('button');
+        decreaseButton.setAttribute('onClick', 'removeFromCart(' + productID + ')');
+        decreaseButton.setAttribute('class', 'btn btn-warning m-1 w-auto');
+        decreaseButton.appendChild(document.createTextNode('-'));
+        // Create the content of the li
+        var productLine = document.createTextNode(productQuantity + ' - ' + productName + ' - ' + '$' + productCost);
+        // Create the li and include it in the list
+        li.appendChild(decreaseButton);
+        li.appendChild(increaseButton);
+        p.appendChild(productLine);
+        li.appendChild(p);
+        ul.appendChild(li);
+    }
+    var productTotalCost = document.createTextNode('Total: $' + totalCost)
+    totalPrice.appendChild(productTotalCost);
 }
