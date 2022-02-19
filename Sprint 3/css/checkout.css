@@ -1,3 +1,4 @@
+<<<<<<< HEAD
     @import url('https://fonts.googleapis.com/css?family=Poppins');
     body {
         font-family: Poppins;
@@ -16,3 +17,18 @@
     #errorEmail {
         display: none;
     }
+=======
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+body {
+    font-family: Poppins;
+}
+
+#errorPassword,
+#errorName,
+#errorPhone,
+#errorAddress,
+#errorLastName,
+#errorEmail {
+    display: none;
+}
+>>>>>>> b09fdc6a8d394bf257df6f23728ac4850aa25d79

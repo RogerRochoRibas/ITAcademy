@@ -207,6 +207,7 @@ var ul = document.getElementById("showCart");
 
 function printCart() {
     // Reset the content of showCart so it won't stack if the function is called again
+<<<<<<< HEAD
     ul.innerHTML = ''
     var totalCost = 0;
     // Calculate prices
@@ -214,10 +215,15 @@ function printCart() {
     var totalPrice = document.getElementById('totalPrice');
     totalPrice.innerHTML = '';
     // Fill the shopping cart modal manipulating the shopping cart dom
+=======
+    ul.innerHTML = "Your Cart:"
+        // Fill the shopping cart modal manipulating the shopping cart dom
+>>>>>>> b09fdc6a8d394bf257df6f23728ac4850aa25d79
     for (let i = 0; i < cart.length; i++) {
         // Select the item we will be adding
         var productName = cart[i].name;
         var productQuantity = cart[i].quantity;
+<<<<<<< HEAD
         var productID = cart[i].id;
         var productCost = cart[i].subtotalWithDiscount;
         totalCost = totalCost + productCost;
@@ -248,3 +254,14 @@ function printCart() {
     var productTotalCost = document.createTextNode('Total: $' + totalCost)
     totalPrice.appendChild(productTotalCost);
 }
+=======
+        var li = document.createElement('li');
+        // This does nothing right now but will help later with styling
+        // Create the content of the li
+        var productLine = document.createTextNode(productQuantity + ' ' + productName);
+        // Create the li and include it in the list
+        li.appendChild(productLine);
+        ul.appendChild(li);
+    }
+};
+>>>>>>> b09fdc6a8d394bf257df6f23728ac4850aa25d79
