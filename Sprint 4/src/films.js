@@ -14,8 +14,6 @@ function getMoviesFromDirector(array, director) {
         .filter(function(array) {
             return array.director == director
 
-        }).map(function(array) {
-            return array
         });
     return moviesFromDirector
 }
