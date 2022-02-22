@@ -10,17 +10,25 @@ function getAllDirectors(array) {
 // Exercise 2: Get the films of a certain director
 
 function getMoviesFromDirector(array, director) {
-    var moviesFromDirector = array
-        .filter(function(array) {
-            return array.director == director
-
-        });
+    var moviesFromDirector = 
+    array.filter((array) => array.director == director);
     return moviesFromDirector
 }
 
 // Exercise 3: Calculate the average of the films of a given director.
 function moviesAverageOfDirector(array, director) {
-
+var initialValue = 0;
+// Find the director's movies
+var moviesFromDirector = array.filter((array) => array.director == director);
+// Get the movie's Scores
+var moviesFromDirectorScore = moviesFromDirector.map(obj => { return obj.score});
+// Average the Scores
+var totalScore = averageScore => averageScore.reduce(
+(previousValue, currentValue) => previousValue + currentValue, initialValue) / averageScore.length;
+// Round the number to 2 decimals
+var averageScore = totalScore(moviesFromDirectorScore).toFixed(2);
+// Return a Number
+return parseFloat(averageScore)
 }
 
 // Exercise 4:  Alphabetic order by title 
