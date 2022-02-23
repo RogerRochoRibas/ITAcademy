@@ -71,11 +71,11 @@ function moviesAverageByCategory(array, genre) {
     // Get movies from the Genre
     var moviesCorrectGenre = moviesWithScore.filter(movie => movie.genre.includes(genre))
     // Get the movie's Scores
-    var moviesFromGenreScore = moviesCorrectGenre.map(obj => { return obj.score});
+    var moviesFromGenreScore = moviesCorrectGenre.map(movie => { return movie.score});
     // Create the function to average the Scores
     var totalScore = averageScore => averageScore.reduce(
     (previousValue, currentValue) => previousValue + currentValue, 0) / averageScore.length;
-    // Apply the function to average and round the number to 2 decimals
+    // Apply the function to average, and round the number to 2 decimals (toFixed)
     var averageScore = totalScore(moviesFromGenreScore).toFixed(2);
     // Return a Number
     averageScoreNumber = parseFloat(averageScore);
@@ -83,8 +83,35 @@ function moviesAverageByCategory(array, genre) {
 }
 
 // Exercise 7: Modify the duration of movies to minutes
-function hoursToMinutes() {
-
+function hoursToMinutes(array) {
+    // Make a Deep clone of the array
+    newArray = [...array]
+    // Get the Hours from movie Duration
+    // Regular expression for the hours
+    array.forEach((movie,index) => {
+        const regexTimeHours = /([0-9]+)h/;
+        // Apply the regular expression
+        var timeHours = movie.duration.match(regexTimeHours);
+        // Make it a number
+        var timeHoursN = parseFloat(timeHours)
+        if (isNaN(timeHoursN)) {timeHoursN = 0};
+        // Get the Minutes from movie Duration
+        // Regular expression for the minutes
+        const regexTimeMin = /([0-9]+)m/;
+        // Apply the regular expression
+        var timeMin = movie.duration.match(regexTimeMin);
+        // Make it a number
+        var timeMinN = parseFloat(timeMin)
+        if (isNaN(timeMinN)) {timeMinN = 0};
+        // Transform them into a total in minutes
+        var timeTotal = (timeHoursN * 60)+timeMinN;
+        // Make it a number
+        var timeTotalN = parseFloat(timeTotal)
+        newArray[index].duration = timeTotalN;
+        console.log(movie.title,' Duration: ',movie.duration,' timeHoursN:', timeHoursN,'timeMinN:', timeMinN)
+    ;})
+console.log('old array: ',array)
+return newArray
 }
 
 // Exercise 8: Get the best film of a year
