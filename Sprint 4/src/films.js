@@ -84,39 +84,44 @@ function moviesAverageByCategory(array, genre) {
 
 // Exercise 7: Modify the duration of movies to minutes
 function hoursToMinutes(array) {
-    // Make a Deep clone of the array
-    newArray = [...array]
-    // Get the Hours from movie Duration
-    // Regular expression for the hours
-    array.forEach((movie,index) => {
+    // Map the old array into a new one
+    let newArray = array.map((movie) => {
+        // Get the hours from the movie Duration
+        // Regular expression for the hours
         const regexTimeHours = /([0-9]+)h/;
         // Apply the regular expression
         var timeHours = movie.duration.match(regexTimeHours);
-        // Make it a number
+        // Make the hours a number
         var timeHoursN = parseFloat(timeHours)
+        // If the movie has no hours, make it 0
         if (isNaN(timeHoursN)) {timeHoursN = 0};
         // Get the Minutes from movie Duration
         // Regular expression for the minutes
         const regexTimeMin = /([0-9]+)m/;
         // Apply the regular expression
         var timeMin = movie.duration.match(regexTimeMin);
-        // Make it a number
+        // Make the minutes a number
         var timeMinN = parseFloat(timeMin)
+        // If the movie has no minutes, make it 0
         if (isNaN(timeMinN)) {timeMinN = 0};
         // Transform them into a total in minutes
         var timeTotal = (timeHoursN * 60)+timeMinN;
-        // Make it a number
+        // Make the final result a number
         var timeTotalN = parseFloat(timeTotal)
-        newArray[index].duration = timeTotalN;
-        console.log(movie.title,' Duration: ',movie.duration,' timeHoursN:', timeHoursN,'timeMinN:', timeMinN)
+        // Make a deep copy of the element
+        let newMovie = {...movie}
+        // Update the duration of the deep copy with the new value
+        newMovie.duration = timeTotalN 
+        // Return the new value into the new array
+        return newMovie
     ;})
-console.log('old array: ',array)
+    // Return the new array
 return newArray
 }
 
 // Exercise 8: Get the best film of a year
 function bestFilmOfYear() {
-
+    
 }
 
 
