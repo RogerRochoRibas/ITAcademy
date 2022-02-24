@@ -120,8 +120,17 @@ return newArray
 }
 
 // Exercise 8: Get the best film of a year
-function bestFilmOfYear() {
-    
+function bestFilmOfYear(array, year) {
+// Filter the movies by year
+let moviesOfYear = array.filter(movie => movie.year == year)
+// Make an array with the movies scores
+let moviesYearScores = moviesOfYear.map((movie) => {return movie.score})
+// Look for the highest score in the array
+let bestScore; 
+bestScore = moviesYearScores.reduce((best,movie) => (movie.score > best ? movie.score:best));
+// Get the film with the best score
+let bestMovieOfTheYear = moviesOfYear.filter(movie => movie.score == bestScore)
+return bestMovieOfTheYear;
 }
 
 
