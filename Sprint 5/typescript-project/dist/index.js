@@ -9,6 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 // npx tsc -w
+// Have an initial text
+var jokes = 'Click to get a joke';
+const jokeText = document.getElementById('jokeText');
+jokeText.textContent = jokes;
+// Get a joke button
 function callAPI() {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield fetch("http://icanhazdadjoke.com", {
@@ -16,10 +21,24 @@ function callAPI() {
                 Accept: "application/json",
             },
         });
-        const joke = yield response.json();
+        jokes = yield response.json();
+        // Exercise 2 Introduce the joke into the HTML
         const jokeText = document.getElementById('jokeText');
-        jokeText.textContent = joke.joke;
-        console.log(joke.joke);
+        jokeText.textContent = jokes.joke;
+        console.log(jokes.joke);
     });
+}
+// Exercise 3 score the jokes and store the ratings in reportAcudits
+var reportAcudits = [];
+function scoreJokes(score) {
+    var currentTime = new Date();
+    var currentTimeISO = currentTime.toISOString();
+    var currentScore = {
+        date: currentTimeISO,
+        score: score,
+        joke: jokes.joke
+    };
+    reportAcudits.push(currentScore);
+    console.log(reportAcudits);
 }
 //# sourceMappingURL=index.js.map
