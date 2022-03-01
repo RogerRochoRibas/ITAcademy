@@ -6,5 +6,7 @@ async function callAPI() {
     },
   });
   const joke = await response.json();
+  const jokeText = document.getElementById('jokeText');
+  jokeText!.textContent = joke.joke;
   console.log(joke.joke);
 }

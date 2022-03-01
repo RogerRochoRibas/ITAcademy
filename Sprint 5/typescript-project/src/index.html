@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html>
-<header>
-</header>
-<body>
-    <h1>Sprint 5 IT ACADEMY</h1>
-    <button type="button" onclick="callAPI()">Següent acudit</button>
+  <header>
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css" />
+  </header>
+  <body>
+    <div class="container-fluid p-5 row m-auto mt-5 text-center">
+        <div class="bg-white p-5 m-auto col-7 row shadow rounded height">
+        <h1 class="m-auto w-auto col-8">Preparat per ruire?</h1>
+        <p class="m-auto my-4 col-11 lead" id="jokeText"></p>
+        <button class="btn btn-primary btn-lg m-auto my-4 col-auto" type="button" onclick="callAPI()">Següent acudit</button></div>
+    </div>
     <script src="../dist/index.js"></script>
-</body>
-
+    <script src="../node_modules/@popperjs/core/dist/cjs/popper.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  </body>
 </html>

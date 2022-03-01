@@ -17,6 +17,8 @@ function callAPI() {
             },
         });
         const joke = yield response.json();
+        const jokeText = document.getElementById('jokeText');
+        jokeText.textContent = joke.joke;
         console.log(joke.joke);
     });
 }
