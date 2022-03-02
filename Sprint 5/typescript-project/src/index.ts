@@ -6,7 +6,7 @@ interface jokeArray {
   status: number;
 }
 var jokes: jokeArray = {
-  id: "initial",
+  id: '',
   joke: "Click to get a joke",
   status: 0,
 };
@@ -68,3 +68,41 @@ window.onload = function () {
 // With the city ID for Barcelona
   weatherBalloon(3128760);
 };
+
+// Exercise 5
+interface chuckArray {
+  icon_url:string;
+  id:string;
+  url:string;
+  value:string;
+}
+var chuckJoke: chuckArray = {
+  icon_url:'',
+  id: '',
+  value: '',
+  url:'',
+};
+async function callChuck() {
+  const response = await fetch("https://api.chucknorris.io/jokes/random", {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+  chuckJoke = await response.json();
+  // Introduce the joke into the HTML
+  const jokeText = document.getElementById("jokeText");
+  jokeText!.textContent = chuckJoke.value;
+}
+
+// Call jokes randomly
+function getRandomJoke() {
+  var randomNumber = Math.floor(Math.random() * (3 - 1));
+  // 50% you get dad joke
+  if (randomNumber == 1) {
+    callAPI()
+  }
+  // 50% you get chuck joke
+  if (randomNumber == 0) {
+    callChuck()
+  }
+}

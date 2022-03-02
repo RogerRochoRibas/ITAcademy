@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var jokes = {
-    id: "initial",
+    id: '',
     joke: "Click to get a joke",
     status: 0,
 };
@@ -69,4 +69,35 @@ window.onload = function () {
     // With the city ID for Barcelona
     weatherBalloon(3128760);
 };
+var chuckJoke = {
+    icon_url: '',
+    id: '',
+    value: '',
+    url: '',
+};
+function callChuck() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield fetch("https://api.chucknorris.io/jokes/random", {
+            headers: {
+                Accept: "application/json",
+            },
+        });
+        chuckJoke = yield response.json();
+        // Introduce the joke into the HTML
+        const jokeText = document.getElementById("jokeText");
+        jokeText.textContent = chuckJoke.value;
+    });
+}
+// Call jokes randomly
+function getRandomJoke() {
+    var randomNumber = Math.floor(Math.random() * (3 - 1));
+    // 50% you get dad joke
+    if (randomNumber == 1) {
+        callAPI();
+    }
+    // 50% you get chuck joke
+    if (randomNumber == 0) {
+        callChuck();
+    }
+}
 //# sourceMappingURL=index.js.map
