@@ -1,8 +1,41 @@
+#blob {
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+}
+.blob1 {
+  background-image: url(../img/blob1.svg);
+}
+.blob2 {
+  background-image: url(../img/blob2.svg);
+}
+.blob3 {
+  background-image: url(../img/blob3.svg);
+}
+.blob3 {
+  background-image: url(../img/blob3.svg);
+}
+.blob4 {
+  background-image: url(../img/blob4.svg);
+}
+.blob5 {
+  background-image: url(../img/blob5.svg);
+}
+.blob6 {
+  background-image: url(../img/blob6.svg);
+}
+.blob7 {
+  background-image: url(../img/blob7.svg);
+}
+.blobcontainer {
+  height: 100%;
+}
 body {
-    background: url('../img/background.jpg');
-    background-position: center;
-    background-size: cover;
-    min-height: 100%;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  height: 100vh;
+  min-height: 900px;
+  min-width: auto;
+}
+#weather {
+    width:70px;
+    height:auto
 }

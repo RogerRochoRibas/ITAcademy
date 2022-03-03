@@ -48,7 +48,8 @@ function weatherBalloon(cityID: number) {
     "https://api.openweathermap.org/data/2.5/weather?id=" +
       cityID +
       "&appid=" +
-      key
+      key +
+      '&units=metric'
   )
     // Convert data to json
     .then(function (resp) {
@@ -58,9 +59,14 @@ function weatherBalloon(cityID: number) {
       console.log('data',data);
       // Get the current weather
       const currentWeather = data.weather[0].main;
-      // Insert it in the HTML
-  const weatherText = document.getElementById("weather");
-  weatherText!.textContent = currentWeather;
+      // Insert Weather in the HTML
+  const weatherIcon:any = document.getElementById("weather");
+  weatherIcon.src = '../img/'+currentWeather+'.svg'
+  // Get the current temperature
+  const currentTemperature:number = data.main.temp
+  // Insert Temprature in the HTML
+  var temperature:any = document.getElementById("temperature")
+  temperature.innerText = currentTemperature+'º'
     });
 }
 // Execute on load
@@ -106,3 +112,19 @@ function getRandomJoke() {
     callChuck()
   }
 }
+
+// Exercise 6 
+// Changing blobs when the new joke button is clicked
+var currentBlob:number = 1;
+function changeBG() {
+  var blob = document.getElementById('blob');
+  blob!.classList.remove('blob'+currentBlob)
+  currentBlob++
+  blob!.classList.add('blob'+currentBlob);  
+  if (currentBlob == 7) {
+    blob!.classList.remove('blob'+currentBlob)
+    currentBlob = 1
+    blob!.classList.add('blob'+currentBlob); 
+  }
+}
+// Weather icons

@@ -8,33 +8,34 @@
       href="../node_modules/bootstrap/dist/css/bootstrap.css"
     />
   </header>
-  <body>
+  <body class="p-3">
     <!-- navbar -->
-    <nav class="navbar sticky-top bg-light justify-content-start p-3">
-    <h3 class="m-1">Barcelona Weather:</h3><h3 class="m-1" id="weather"></h3>
+    <nav class="navbar sticky-top justify-content-start p-3">
+    <h3 class="m-1">Barcelona Weather:</h3><img class="m-1" src='' id="weather"><h3 class="m-1" id="temperature"></h3>
   </nav>
   <!-- Jokes Section -->
-    <div class="container-fluid p-5 row m-auto mt-5 text-center">
-      <div class="bg-white p-5 m-auto col-7 row shadow rounded height">
-        <h1 class="m-auto w-auto col-8">Preparat per ruire?</h1>
+    <div class="blobcontainer container-fluid row mx-auto text-center">
+      <div id="blob" class="blob1 containerfluid row text-white">
+      <div class="p-5 m-auto col-6 row">
+        <h1 class="m-auto w-auto col-8 p-4">Preparat per ruire?</h1>
         <p class="m-auto my-4 col-11 lead" id="jokeText"></p>
         <div>
           <button
-            class="btn btn-outline-success col-auto mx-2"
+            class="btn btn-outline-light col-auto mx-2"
             type="button"
             onclick="scoreJokes(1)"
           >
             Score: 1
           </button>
           <button
-            class="btn btn-outline-success col-auto mx-2"
+            class="btn btn-outline-light col-auto mx-2"
             type="button"
             onclick="scoreJokes(2)"
           >
             Score: 2
           </button>
           <button
-            class="btn btn-outline-success col-auto mx-2"
+            class="btn btn-outline-light col-auto mx-2"
             type="button"
             onclick="scoreJokes(3)"
           >
@@ -44,11 +45,12 @@
         <button
           class="btn btn-primary btn-lg m-auto my-4 col-auto"
           type="button"
-          onclick="getRandomJoke(1,3)"
+          onclick="getRandomJoke(1,3); changeBG()"
         >
           Següent acudit
         </button>
       </div>
+    </div>
     </div>
     <script src="../dist/index.js"></script>
     <script src="../node_modules/@popperjs/core/dist/cjs/popper.js"></script>
