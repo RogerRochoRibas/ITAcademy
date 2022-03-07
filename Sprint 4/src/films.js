@@ -83,41 +83,25 @@ function moviesAverageByCategory(array, genre) {
 }
 
 // Exercise 7: Modify the duration of movies to minutes
-function hoursToMinutes(array) {
-    // Map the old array into a new one
-    let newArray = array.map((movie) => {
-        // Get the hours from the movie Duration
-        // Regular expression for the hours
-        const regexTimeHours = /([0-9]+)h/;
-        // Apply the regular expression
-        var timeHours = movie.duration.match(regexTimeHours);
-        // Make the hours a number
-        var timeHoursN = parseFloat(timeHours)
-        // If the movie has no hours, make it 0
-        if (isNaN(timeHoursN)) {timeHoursN = 0};
-        // Get the Minutes from movie Duration
-        // Regular expression for the minutes
-        const regexTimeMin = /([0-9]+)m/;
-        // Apply the regular expression
-        var timeMin = movie.duration.match(regexTimeMin);
-        // Make the minutes a number
-        var timeMinN = parseFloat(timeMin)
-        // If the movie has no minutes, make it 0
-        if (isNaN(timeMinN)) {timeMinN = 0};
-        // Transform them into a total in minutes
-        var timeTotal = (timeHoursN * 60)+timeMinN;
-        // Make the final result a number
-        var timeTotalN = parseFloat(timeTotal)
-        // Make a deep copy of the element
-        let newMovie = {...movie}
-        // Update the duration of the deep copy with the new value
-        newMovie.duration = timeTotalN 
-        // Return the new value into the new array
-        return newMovie
-    ;})
-    // Return the new array
-return newArray
-}
+const hoursToMinutes = (movies) => {
+    let result = movies.map((movie) => {
+        let stringDuration = movie.duration;
+        let indexHours = stringDuration.indexOf('h');
+        console.log('indexHours: ',indexHours)
+        let indexMinutes = stringDuration.indexOf('min');
+        console.log('indexMinutes: ',indexMinutes)
+        let hours = parseInt(stringDuration.substring(0, indexHours).trim());
+        let minutes = 0;
+        if (stringDuration.indexOf('min') !== -1) {
+            minutes = parseInt(stringDuration.substring(indexHours + 1, indexMinutes + indexHours + 1).trim());
+        }
+        let newDuration = {
+            duration: hours * 60 + minutes
+        };
+        return newDuration;
+    });
+    return result;
+};
 
 // Exercise 8: Get the best film of a year
 function bestFilmOfYear(array, year) {
