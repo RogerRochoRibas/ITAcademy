@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React from "react"
 import {data} from './components/escena/data.js';
 import './App.css';
+import img1 from './img/1.jpg'
 
 function App() {
 
@@ -31,15 +32,22 @@ function App() {
   `border-color:black;
   border-width:2px;
   margin:1em;
-  background: ${props => props.active ? '#FF8C69' : 'hsla(0, 90%, 100%)'};
+  background: ${props => props.active ? '#FF8C69' : 'white'};
   border-radius:30px;
   border-style:solid;
   padding: 0.5rem;
   max-width: 90%;`;
 
-  function Escena() {
-    return data.map((data,i) => <Section active={i===counter} key={i} id={i+1}>{i+1}: {data}</Section>);
+  function Scene() {
+    return data.map((data,i) => <Section active={i===counter} key={i} id={i+1}>{i+1}: {data.txt}</Section>);
   }
+  // Background
+  var Body = styled.div`
+  height:100%;
+  background-size:cover;
+  background-image:url(${img1};
+  `;
+
   // Welcome
   var [welcome, setWelcome] = React.useState(true)
   const Continue=()=> {setWelcome(false)}
@@ -52,10 +60,10 @@ function App() {
   // Main Page
   else {
     return (
-      <div className="App">
+      <Body className="App" id="something">
         <Buttons/>
-        <Escena/>
-      </div>
+        <Scene/>
+      </Body>
     )
   }
 }
