@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import React from "react"
 import {data} from './components/escena/data.js';
-
 import './App.css';
 
 function App() {
@@ -18,28 +17,30 @@ function App() {
 
   var [counter, setCounter] = React.useState(0)
 
-  const ClickedMinus =()=> {
-        if (counter>0){
-          setCounter(counter-1);
-          console.log('counter: ',counter)
-        }
+  const ClickedPrevious=()=> {
+    if (counter >0) {
+      setCounter(counter-1);  
+    }
   }
   
-function ClickedPlus() {
-    if (counter<4){
+  function ClickedNext() {
+    if (counter<3) {
       setCounter(counter+1);
     }
   }
   
   function Buttons() {
     return <div>
-        <button onClick={() => ClickedMinus()}>Previous</button>
-        <button onClick={() => ClickedPlus()}>Next</button>
+        <button onClick={() => ClickedPrevious()}>Previous</button>
+        <button onClick={() => ClickedNext()}>Next</button>
     </div>
   }
+
+  
+// Exercise 3
   function Escena() {
-      return data.map((data,i) => <Section active={i===counter} key={i} id={i+1}>{i+1}: {data}</Section>);}
-;
+    return data.map((data,i) => <Section active={i===counter} key={i} id={i+1}>{i+1}: {data}</Section>);}
+  ;
   
   return (
     <div className="App">
