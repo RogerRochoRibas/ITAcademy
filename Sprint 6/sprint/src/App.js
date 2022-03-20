@@ -5,6 +5,28 @@ import './App.css';
 
 function App() {
 
+  // Buttons
+  var [counter, setCounter] = React.useState(0)
+
+  function Buttons() {
+    const ClickedPrevious=()=> {
+      if (counter >0) {
+        setCounter(counter-1);  
+      }
+    }
+  
+    const ClickedNext=()=> {
+      if (counter<3) {
+        setCounter(counter+1);
+      }
+    }
+  
+  return <div>
+      <button onClick={() => ClickedPrevious()}>Previous</button>
+      <button onClick={() => ClickedNext()}>Next</button>
+    </div>
+  }
+  // Texts
   const Section = styled.div
   `border-color:black;
   border-width:2px;
@@ -15,39 +37,27 @@ function App() {
   padding: 0.5rem;
   max-width: 90%;`;
 
-  var [counter, setCounter] = React.useState(0)
-
-  const ClickedPrevious=()=> {
-    if (counter >0) {
-      setCounter(counter-1);  
-    }
-  }
-  
-  function ClickedNext() {
-    if (counter<3) {
-      setCounter(counter+1);
-    }
-  }
-  
-  function Buttons() {
-    return <div>
-        <button onClick={() => ClickedPrevious()}>Previous</button>
-        <button onClick={() => ClickedNext()}>Next</button>
-    </div>
-  }
-
-  
-// Exercise 3
   function Escena() {
-    return data.map((data,i) => <Section active={i===counter} key={i} id={i+1}>{i+1}: {data}</Section>);}
-  ;
-  
-  return (
-    <div className="App">
-      <Buttons/>
-      <Escena/>
+    return data.map((data,i) => <Section active={i===counter} key={i} id={i+1}>{i+1}: {data}</Section>);
+  }
+  // Welcome
+  var [welcome, setWelcome] = React.useState(true)
+  const Continue=()=> {setWelcome(false)}
+  if (welcome===true) {
+    return <div className="App">
+      <button onClick={() => Continue()}>Continue</button>
+      <p>In this page we use React components to show 4 lines of text. You can use the Previous and Next buttons to choose which line is highlighted.</p>
     </div>
-  );
+  } 
+  // Main Page
+  else {
+    return (
+      <div className="App">
+        <Buttons/>
+        <Escena/>
+      </div>
+    )
+  }
 }
 
 export default App;
