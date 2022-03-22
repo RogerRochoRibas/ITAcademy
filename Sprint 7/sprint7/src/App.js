@@ -28,17 +28,24 @@ function App() {
     width:700px;
     `
     if (webState) {
-    return <Panell>
-      <div>
-        <label for="number">Número de páginas</label>
-        <input type="text" inputmode="numeric" pattern="[0-9]*" id="pages" name="pages" defaultValue={pagesNumber} onChange={e => setPagesNumber(document.getElementById('pages').value)}></input>
-      </div>
-      <div>
-        <label for="number">Número de idiomas</label>
-        <input type="text" inputmode="numeric" pattern="[0-9]*" id="languages" name="languages" defaultValue={languagesNumber} onChange={e => setLanguagesNumber(document.getElementById('languages').value)}></input>
-      </div>
-    </Panell>} else {return []}
+      return <Panell>
+        <div>
+          <label for="number">Número de páginas </label>
+          <Button text='+'></Button>
+          <input type="text" inputmode="numeric" pattern="[0-9]*" id="pages" name="pages" defaultValue={pagesNumber} onChange={e => setPagesNumber(document.getElementById('pages').value)}></input>
+          <Button text='-'></Button>
+        </div>
+        <div>
+          <label for="number">Número de idiomas </label>
+          <Button text='+'></Button>
+          <input type="text" inputmode="numeric" pattern="[0-9]*" id="languages" name="languages" defaultValue={languagesNumber} onChange={e => setLanguagesNumber(document.getElementById('languages').value)}></input>
+          <Button text='-'></Button>
+        </div>
+      </Panell>
+    } else {return []}
   }
+  // Exercise 3
+  function Button(props) {return <button>{props.text}</button>}
 
   return (
     <div className="App">
