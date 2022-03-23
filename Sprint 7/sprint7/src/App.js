@@ -17,6 +17,13 @@ function App() {
     if (seoState) {seoPrice=300} else (seoPrice=0);
     if (adsState) {adsPrice=200} else (adsPrice=0);
     setTotalPrice(webPrice+seoPrice+adsPrice+webExtra)
+    //Exercise 4 Local Storage
+    localStorage.setItem('webState',webState)
+    localStorage.setItem('seoState',seoState)
+    localStorage.setItem('adsState',adsState)
+    localStorage.setItem('pagesNumber',pagesNumber)
+    localStorage.setItem('langsNumber',langsNumber)
+    //End of Exercise 4
   },[[webState, seoState, adsState, pagesNumber, langsNumber]])
   // Exercise 2
   function PanellRender() {
