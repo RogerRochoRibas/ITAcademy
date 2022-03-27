@@ -3,12 +3,32 @@ import React from "react"
 import './App.css';
 
 function App() {
-  var [webState, setWebState] = React.useState(false)
-  var [seoState, setSeoState] = React.useState(false)
-  var [adsState, setAdsState] = React.useState(false)
+  
+  var [webState, setWebState] = React.useState(() => {
+    let saved = localStorage.getItem("webState");
+    return saved || "";
+  })
+  var [seoState, setSeoState] = React.useState(() => {
+    let saved = localStorage.getItem("seoState");
+    return saved || "";
+  })
+  var [adsState, setAdsState] = React.useState(() => {
+    let saved = localStorage.getItem("adsState");
+    return saved || "";
+  })
   var [totalPrice, setTotalPrice] = React.useState(0)
-  var [pagesNumber, setPagesNumber] = React.useState(1)
-  var [langsNumber, setLangsNumber] = React.useState(1)
+  var [pagesNumber, setPagesNumber] = React.useState(() => {
+    let saved = localStorage.getItem("pagesNumber");
+    if (saved==='false') {
+      return 1} else {
+      return saved};
+  })
+  var [langsNumber, setLangsNumber] = React.useState(() => {
+    let saved = localStorage.getItem("langsNumber");
+    if (saved==='undefined') {
+      return 1} else {
+      return saved};
+  })
 
   React.useEffect(()=>{
     let webPrice=0;let seoPrice=0;let adsPrice=0; let webExtra=0;
@@ -76,10 +96,10 @@ function App() {
   function DecreaseLangsButton(props) {return <ButtonStyle onClick={DecreaseLangs}>{props.text}</ButtonStyle>}
 
   function IncreasePages() {
-    setPagesNumber(pagesNumber+1)
+    setPagesNumber(parseInt(pagesNumber)+1)
   }
   function IncreaseLangs() {
-    setLangsNumber(langsNumber+1)
+    setLangsNumber(parseInt(langsNumber)+1)
   }
   function DecreasePages() {
     if (pagesNumber>1){
