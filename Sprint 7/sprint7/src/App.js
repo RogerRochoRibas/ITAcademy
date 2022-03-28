@@ -6,25 +6,28 @@ function App() {
   
   var [webState, setWebState] = React.useState(() => {
     let saved = localStorage.getItem("webState");
-    return saved || "";
+    // If the checkbox was true in local storage, then keep true, if there is not local storage or it was false, then keep false
+    if (saved==='true') {return true} else {return false};
   })
   var [seoState, setSeoState] = React.useState(() => {
     let saved = localStorage.getItem("seoState");
-    return saved || "";
+    if (saved==='true') {return true} else {return false};
   })
   var [adsState, setAdsState] = React.useState(() => {
     let saved = localStorage.getItem("adsState");
-    return saved || "";
+    if (saved==='true') {return true} else {return false};
   })
   var [totalPrice, setTotalPrice] = React.useState(0)
   var [pagesNumber, setPagesNumber] = React.useState(() => {
     let saved = localStorage.getItem("pagesNumber");
+    // If there is no local storage, then default to 1 (it was false when we had no local storage)
     if (saved==='false') {
       return 1} else {
       return saved};
   })
   var [langsNumber, setLangsNumber] = React.useState(() => {
     let saved = localStorage.getItem("langsNumber");
+    // If there is no local storage, then default to 1 (it was undefined when we have no local storage)
     if (saved==='undefined') {
       return 1} else {
       return saved};
@@ -43,7 +46,6 @@ function App() {
     localStorage.setItem('adsState',adsState)
     localStorage.setItem('pagesNumber',pagesNumber)
     localStorage.setItem('langsNumber',langsNumber)
-    //End of Exercise 4
   },[[webState, seoState, adsState, pagesNumber, langsNumber]])
   // Exercise 2
   function PanellRender() {
@@ -109,15 +111,18 @@ function App() {
     if (langsNumber>1){
     setLangsNumber(langsNumber-1)}
   }
+  console.log('webState: ',webState)
+  console.log('seoState: ',seoState)
+  console.log('adsState: ',adsState)
   return (
     <div className="App">
       <p>¿Qué quieres hacer?</p>
-      <input type="checkbox" id="web" name="web" onChange={e => setWebState(document.getElementById('web').checked)}></input>
+      <input type="checkbox" id="web" name="web" checked={webState} onChange={e => setWebState(document.getElementById('web').checked)}></input>
       <label for="web">Una página web (500€)</label><br></br>
       <PanellRender></PanellRender>
-      <input type="checkbox" id="seo" name="seo" onChange={e => setSeoState(document.getElementById('seo').checked)}></input>
+      <input type="checkbox" id="seo" name="seo" checked={seoState} onChange={e => setSeoState(document.getElementById('seo').checked)}></input>
       <label for="seo">Una consultoría SEO (300€)</label><br></br>
-      <input type="checkbox" id="ads" name="ads" onChange={e => setAdsState(document.getElementById('ads').checked)}></input>
+      <input type="checkbox" id="ads" name="ads" checked={adsState} onChange={e => setAdsState(document.getElementById('ads').checked)}></input>
       <label for="ads">Una campaña de Google Ads (200€)</label><br></br>
       <p>Total Price: {totalPrice}</p>
     </div>
