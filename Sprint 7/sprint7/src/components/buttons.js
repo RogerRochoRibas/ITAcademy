@@ -2,33 +2,48 @@ import styled from "styled-components";
 import React from "react"
 
 
-export function WebButton({ setWebState }) {
+export function WebButton({ setWebState,webState }) {
     return <div>
         <input type="checkbox" id="web" name="web" checked={webState} onChange={e => setWebState(document.getElementById('web').checked)}></input>
         <label for="web">Una página web (500€)</label>
         <br></br>
     </div>
 }
-export function SeoButton({ setSeoState }) {
+export function SeoButton({ setSeoState,seoState }) {
     return <div>
         <input type="checkbox" id="seo" name="seo" checked={seoState} onChange={e => setSeoState(document.getElementById('seo').checked)}></input>
         <label for="seo">Una consultoría SEO (300€)</label>
         <br></br>
     </div>
 }
-export function AdsButton({ setAdsState }) {
+export function AdsButton({ setAdsState,adsState }) {
     return <div>
         <input type="checkbox" id="ads" name="ads" checked={adsState} onChange={e => setAdsState(document.getElementById('ads').checked)}></input>
       <label for="ads">Una campaña de Google Ads (200€)</label>
       <br></br>
     </div>
 }
-export function TotalPrice() {
+export function TotalPrice(props) {
+    var [totalPrice, setTotalPrice] = React.useState(0)
+  React.useEffect(()=>{
+    let webPrice=0;let seoPrice=0;let adsPrice=0; let webExtra=0;
+    if (props.webState) {webPrice=500} else {webPrice=0};
+    if (props.webState) {webExtra=props.pagesNumber*props.langsNumber*30} else {webExtra=0};
+    if (props.seoState) {seoPrice=300} else (seoPrice=0);
+    if (props.adsState) {adsPrice=200} else (adsPrice=0);
+    setTotalPrice(webPrice+seoPrice+adsPrice+webExtra)
+    //Exercise 4 Local Storage
+    localStorage.setItem('webState',props.webState)
+    localStorage.setItem('seoState',props.seoState)
+    localStorage.setItem('adsState',props.adsState)
+    localStorage.setItem('pagesNumber',props.pagesNumber)
+    localStorage.setItem('langsNumber',props.langsNumber)
+  },[props.webState,props.seoState,props.adsState,props.pagesNumber,props.langsNumber])
     return <p>Total Price: {totalPrice}</p>
 }
 
 //Exercise 2
-export function PanellRender() {
+export function PanellRender(props) {
     const Panell = styled.div`
     border:2px solid black;
     border-radius: 20px;
@@ -36,10 +51,10 @@ export function PanellRender() {
     margin:auto;
     width:700px;
     `
-    if (webState) {
+    if (props.webState) {
       return <Panell>
-        <NumberPages setLangsNumber={setLangsNumber}></NumberPages>
-        <NumberLangs setPagesNumber={setPagesNumber}></NumberLangs>
+        <NumberPages setPagesNumber={props.setPagesNumber} pagesNumber={props.pagesNumber}></NumberPages>
+        <NumberLangs setLangsNumber={props.setLangsNumber} langsNumber={props.langsNumber}></NumberLangs>
       </Panell>
     } else {return []}
 }
@@ -62,52 +77,24 @@ const ButtonStyle = styled.button`
     vertical-align: middle;
     margin:3px;`
 
-function NumberPages({ setPagesNumber }) {
-    var [pagesNumber, setPagesNumber] = React.useState(() => {
-        let saved = localStorage.getItem("pagesNumber");
-        // If there is no local storage, then default to 1 (it was false when we had no local storage)
-        if (saved==='false') {
-            return 1} else {
-            return saved};
-    })
+function NumberPages({ setPagesNumber },props) {
+    var increasePages = function IncreasePages() {setPagesNumber(parseInt(localStorage.getItem("pagesNumber"))+1)};
+    var decreasePages = function DecreasePages() {if (localStorage.getItem("pagesNumber")>1) {setPagesNumber(parseInt(localStorage.getItem("pagesNumber"))-1)}}
     return <div>
         <label for="number">Número de páginas </label>
-        <ButtonStyle onClick={DecreasePages}>-</ButtonStyle>
-        <input type="text" inputmode="numeric" pattern="[0-9]*" id="pages" name="pages" defaultValue={pagesNumber} onChange={e => setPagesNumber(document.getElementById('pages').value)}></input>
-        <ButtonStyle onClick={IncreasePages}>+</ButtonStyle>
-  </div>
-}
-
-function NumberLangs({ setLangsNumber }) {
-    var [langsNumber, setLangsNumber] = React.useState(() => {
-        let saved = localStorage.getItem("langsNumber");
-        // If there is no local storage, then default to 1 (it was undefined when we have no local storage)
-        if (saved==='undefined') {
-            return 1} else {
-            return saved};
-    })
-    return <div>
-        <label for="number">Número de idiomas </label>
-        <ButtonStyle onClick={DecreaseLangs}>-</ButtonStyle>
-        <input type="text" inputmode="numeric" pattern="[0-9]*" id="langs" name="langs" defaultValue={langsNumber} onChange={e => setLangsNumber(document.getElementById('langs').value)}></input>
-        <ButtonStyle onClick={IncreaseLangs}>+</ButtonStyle>
+        <ButtonStyle onClick={decreasePages}>-</ButtonStyle>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" id="pages" name="pages" defaultValue={localStorage.getItem("pagesNumber")} onChange={e => setPagesNumber(document.getElementById('pages').value)}></input>
+        <ButtonStyle onClick={increasePages}>+</ButtonStyle>
     </div>
 }
 
-
-function IncreasePages() {
-    setPagesNumber(parseInt(pagesNumber)+1)
-}
-function IncreaseLangs() {
-    setLangsNumber(parseInt(langsNumber)+1)
-}
-function DecreasePages() {
-    if (pagesNumber>1) {
-        setPagesNumber(pagesNumber-1)
-    }
-}
-function DecreaseLangs() {
-    if (langsNumber>1) {
-        setLangsNumber(langsNumber-1)
-    }
+function NumberLangs({ setLangsNumber },props) {
+    var increaseLangs = function IncreaseLangs() {setLangsNumber(parseInt(localStorage.getItem("langsNumber"))+1)}
+    var decreaseLangs = function DecreaseLangs() {if (localStorage.getItem("langsNumber")>1) {setLangsNumber(parseInt(localStorage.getItem("langsNumber"))-1)}}
+    return <div>
+        <label for="number">Número de idiomas </label>
+        <ButtonStyle onClick={decreaseLangs}>-</ButtonStyle>
+        <input type="text" inputmode="numeric" pattern="[0-9]*" id="langs" name="langs" defaultValue={localStorage.getItem("langsNumber")} onChange={e => setLangsNumber(document.getElementById('langs').value)}></input>
+        <ButtonStyle onClick={increaseLangs}>+</ButtonStyle>
+    </div>
 }
