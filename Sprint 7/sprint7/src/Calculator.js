@@ -1,9 +1,6 @@
 import React from "react"
-import {WebButton} from "./components/buttons";
-import {SeoButton} from "./components/buttons";
-import {AdsButton} from "./components/buttons";
-import {TotalPrice} from "./components/buttons";
-import {PanellRender} from "./components/buttons";
+import {WebButton, SeoButton, AdsButton, TotalPrice, PanellRender, ButtonStyle} from "./components/buttons";
+import {Link} from 'react-router-dom';
 
 export default function Calculator() {
   var [webState, setWebState] = React.useState(() => {
@@ -56,5 +53,8 @@ export default function Calculator() {
     <SeoButton setSeoState={setSeoState} seoState={seoState}></SeoButton>
     <AdsButton setAdsState={setAdsState} adsState={adsState}></AdsButton>
     <TotalPrice webState={webState} seoState={seoState} adsState={adsState} pagesNumber={pagesNumber} langsNumber={langsNumber} totalPrice={totalPrice}></TotalPrice>
-  </div>
+    <ButtonStyle>
+      <Link to='/'>Back</Link>
+    </ButtonStyle>
+    </div>
 }
