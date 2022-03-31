@@ -1,25 +1,25 @@
-import styled from "styled-components";
-import React from "react"
+import styled from 'styled-components';
+import React from 'react'
 
 
 export function WebButton({ setWebState,webState }) {
     return <div>
-        <input type="checkbox" id="web" name="web" checked={webState} onChange={e => setWebState(document.getElementById('web').checked)}></input>
-        <label for="web">Una página web (500€)</label>
+        <input type='checkbox' id='web' name='web' checked={webState} onChange={e => setWebState(document.getElementById('web').checked)}></input>
+        <label for='web'>Una página web (500€)</label>
         <br></br>
     </div>
 }
 export function SeoButton({ setSeoState,seoState }) {
     return <div>
-        <input type="checkbox" id="seo" name="seo" checked={seoState} onChange={e => setSeoState(document.getElementById('seo').checked)}></input>
-        <label for="seo">Una consultoría SEO (300€)</label>
+        <input type='checkbox' id='seo' name='seo' checked={seoState} onChange={e => setSeoState(document.getElementById('seo').checked)}></input>
+        <label for='seo'>Una consultoría SEO (300€)</label>
         <br></br>
     </div>
 }
 export function AdsButton({ setAdsState,adsState }) {
     return <div>
-        <input type="checkbox" id="ads" name="ads" checked={adsState} onChange={e => setAdsState(document.getElementById('ads').checked)}></input>
-      <label for="ads">Una campaña de Google Ads (200€)</label>
+        <input type='checkbox' id='ads' name='ads' checked={adsState} onChange={e => setAdsState(document.getElementById('ads').checked)}></input>
+      <label for='ads'>Una campaña de Google Ads (200€)</label>
       <br></br>
     </div>
 }
@@ -59,7 +59,7 @@ export function PanellRender(props) {
     } else {return []}
 }
 
-const ButtonStyle = styled.button`
+export const ButtonStyle = styled.button`
     background: #FF4742;
     border: 1px solid #FF4742;
     border-radius: 6px;
@@ -78,23 +78,23 @@ const ButtonStyle = styled.button`
     margin:3px;`
 
 function NumberPages({ setPagesNumber },props) {
-    var increasePages = function IncreasePages() {setPagesNumber(parseInt(localStorage.getItem("pagesNumber"))+1)};
-    var decreasePages = function DecreasePages() {if (localStorage.getItem("pagesNumber")>1) {setPagesNumber(parseInt(localStorage.getItem("pagesNumber"))-1)}}
+    var increasePages = function IncreasePages() {setPagesNumber(parseInt(localStorage.getItem('pagesNumber'))+1)};
+    var decreasePages = function DecreasePages() {if (localStorage.getItem('pagesNumber')>1) {setPagesNumber(parseInt(localStorage.getItem('pagesNumber'))-1)}}
     return <div>
-        <label for="number">Número de páginas </label>
+        <label for='number'>Número de páginas </label>
         <ButtonStyle onClick={decreasePages}>-</ButtonStyle>
-        <input type="text" inputmode="numeric" pattern="[0-9]*" id="pages" name="pages" defaultValue={localStorage.getItem("pagesNumber")} onChange={e => setPagesNumber(document.getElementById('pages').value)}></input>
+        <input type='text' inputmode='numeric' pattern='[0-9]*' id='pages' name='pages' defaultValue={localStorage.getItem('pagesNumber')} onChange={e => setPagesNumber(document.getElementById('pages').value)}></input>
         <ButtonStyle onClick={increasePages}>+</ButtonStyle>
     </div>
 }
 
 function NumberLangs({ setLangsNumber },props) {
-    var increaseLangs = function IncreaseLangs() {setLangsNumber(parseInt(localStorage.getItem("langsNumber"))+1)}
-    var decreaseLangs = function DecreaseLangs() {if (localStorage.getItem("langsNumber")>1) {setLangsNumber(parseInt(localStorage.getItem("langsNumber"))-1)}}
+    var increaseLangs = function IncreaseLangs() {setLangsNumber(parseInt(localStorage.getItem('langsNumber'))+1)}
+    var decreaseLangs = function DecreaseLangs() {if (localStorage.getItem('langsNumber')>1) {setLangsNumber(parseInt(localStorage.getItem('langsNumber'))-1)}}
     return <div>
-        <label for="number">Número de idiomas </label>
+        <label for='number'>Número de idiomas </label>
         <ButtonStyle onClick={decreaseLangs}>-</ButtonStyle>
-        <input type="text" inputmode="numeric" pattern="[0-9]*" id="langs" name="langs" defaultValue={localStorage.getItem("langsNumber")} onChange={e => setLangsNumber(document.getElementById('langs').value)}></input>
+        <input type='text' inputmode='numeric' pattern='[0-9]*' id='langs' name='langs' defaultValue={localStorage.getItem('langsNumber')} onChange={e => setLangsNumber(document.getElementById('langs').value)}></input>
         <ButtonStyle onClick={increaseLangs}>+</ButtonStyle>
     </div>
 }

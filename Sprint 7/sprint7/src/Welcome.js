@@ -1,18 +1,16 @@
-import React from "react"
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom';
+import { ButtonStyle } from './components/buttons.js'
 
 export default function Welcome() {
-    return (
-      <div>
+    return <div className='App'>
         <h1>Welcome</h1>
-        <nav
-          style={{
-            borderBottom: "solid 1px",
-            paddingBottom: "1rem",
-          }}
-        >
-          <Link to="/App">To the App</Link>
+        <p>In this page you can use the App to calculate a budget by selecting fields.</p>
+        <p>You can also modify the number of pages and languages with the buttons or write directly.</p>
+        <nav>
+          <ButtonStyle>
+            <Link to='app'>To the App</Link>
+          </ButtonStyle>
         </nav>
       </div>
-    );
   }

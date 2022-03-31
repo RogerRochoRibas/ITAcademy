@@ -1,6 +1,6 @@
-import React from "react"
+import React from 'react'
 import './App.css';
-import { Route, BrowserRouter as Router} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
 import Calculator from './Calculator'
 import Welcome from './Welcome'
 
@@ -8,9 +8,10 @@ function App() {
 
   return (
     <Router>
-      <h1>Routing?</h1>
-      <Route path="/" exact component={Welcome}></Route>
-      <Route path="/App" component={Calculator}></Route>
+      <Routes>
+      <Route path='/' element={<Welcome/>}/>
+      <Route path='app' element={<Calculator/>}></Route>
+      </Routes>
     </Router>
   );
 }
