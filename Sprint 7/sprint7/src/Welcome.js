@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
-import {ButtonStyle} from './components/buttons.js'
+import {ButtonStyle} from './buttons.js'
 
 export default function Welcome() {
     return <div className='App'>

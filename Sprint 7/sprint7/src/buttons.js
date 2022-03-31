@@ -1,27 +1,57 @@
 import styled from 'styled-components';
-import React from 'react'
+import React from 'react';
+import 'reactjs-popup/dist/index.css';
+import infoPNG from './img/info40.png';
 
+function PopupInformation(props) {
+  var modal = document.getElementsByClassName("ModalScreen");
+  function ShowPopup() {
+    modal.style.display = "block";
+  }
+  const ModalScreen = styled.div`
+    display: none;
+    position: fixed;
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+  `
+  const ModalContent = styled.div`
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  `
+  return <><img src={infoPNG} onClick={ShowPopup}/>
+    <ModalScreen className='ModalScreen'><ModalContent>{props.text}</ModalContent></ModalScreen>
+    </>
+};
 
 export function WebButton({ setWebState,webState }) {
-    return <div>
+    return <>
         <input type='checkbox' id='web' name='web' checked={webState} onChange={e => setWebState(document.getElementById('web').checked)}></input>
         <label for='web'>Una página web (500€)</label>
         <br></br>
-    </div>
+    </>
 }
 export function SeoButton({ setSeoState,seoState }) {
-    return <div>
+    return <>
         <input type='checkbox' id='seo' name='seo' checked={seoState} onChange={e => setSeoState(document.getElementById('seo').checked)}></input>
         <label for='seo'>Una consultoría SEO (300€)</label>
         <br></br>
-    </div>
+    </>
 }
 export function AdsButton({ setAdsState,adsState }) {
-    return <div>
+    return <>
         <input type='checkbox' id='ads' name='ads' checked={adsState} onChange={e => setAdsState(document.getElementById('ads').checked)}></input>
       <label for='ads'>Una campaña de Google Ads (200€)</label>
       <br></br>
-    </div>
+    </>
 }
 export function TotalPrice(props) {
     var [totalPrice, setTotalPrice] = React.useState(0)
@@ -85,16 +115,19 @@ function NumberPages({ setPagesNumber },props) {
         <ButtonStyle onClick={decreasePages}>-</ButtonStyle>
         <input type='text' inputmode='numeric' pattern='[0-9]*' id='pages' name='pages' defaultValue={localStorage.getItem('pagesNumber')} onChange={e => setPagesNumber(document.getElementById('pages').value)}></input>
         <ButtonStyle onClick={increasePages}>+</ButtonStyle>
+        <PopupInformation text='En este campo debe introducir el número de páginas que tendrá el sitio web.'/>
     </div>
 }
 
 function NumberLangs({ setLangsNumber },props) {
     var increaseLangs = function IncreaseLangs() {setLangsNumber(parseInt(localStorage.getItem('langsNumber'))+1)}
     var decreaseLangs = function DecreaseLangs() {if (localStorage.getItem('langsNumber')>1) {setLangsNumber(parseInt(localStorage.getItem('langsNumber'))-1)}}
-    return <div>
+    return <>
         <label for='number'>Número de idiomas </label>
         <ButtonStyle onClick={decreaseLangs}>-</ButtonStyle>
         <input type='text' inputmode='numeric' pattern='[0-9]*' id='langs' name='langs' defaultValue={localStorage.getItem('langsNumber')} onChange={e => setLangsNumber(document.getElementById('langs').value)}></input>
         <ButtonStyle onClick={increaseLangs}>+</ButtonStyle>
-    </div>
+        <PopupInformation text='En este campo debe introducir el número de idiomas a los que estará traducido el sitio web.'/>
+    </>
+
 }
