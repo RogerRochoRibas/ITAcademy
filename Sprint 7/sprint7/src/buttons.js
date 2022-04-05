@@ -1,36 +1,23 @@
 import styled from 'styled-components';
 import React from 'react';
-import 'reactjs-popup/dist/index.css';
 import infoPNG from './img/info40.png';
 
-function PopupInformation(props) {
-  var modal = document.getElementsByClassName("ModalScreen");
-  function ShowPopup() {
-    modal.style.display = "block";
-  }
-  const ModalScreen = styled.div`
-    display: none;
-    position: fixed;
-    padding-top: 100px; 
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4);
-  `
-  const ModalContent = styled.div`
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-  `
-  return <><img src={infoPNG} onClick={ShowPopup}/>
-    <ModalScreen className='ModalScreen'><ModalContent>{props.text}</ModalContent></ModalScreen>
-    </>
+
+
+export function PopupInformation(props) {
+  let ModalScreen = () => {return <div className='ModalScreen' onClick={() => props.setModalState(false)}><ModalContent></ModalContent></div>}
+  let ModalContent = () => {return <div className='ModalContent'>Information goes here</div>}
+  console.log('modalState: ', props.modalState)
+  if (props.modalState===true) {
+    return <><ModalScreen/></>
+  } else {return null}
 };
+
+function OpenInfoButton({ setModalState }) {
+  return <>
+      <img onClick={() => setModalState(true)} src={infoPNG}/>
+  </>
+}
 
 export function WebButton({ setWebState,webState }) {
     return <>
@@ -83,8 +70,8 @@ export function PanellRender(props) {
     `
     if (props.webState) {
       return <Panell>
-        <NumberPages setPagesNumber={props.setPagesNumber} pagesNumber={props.pagesNumber}></NumberPages>
-        <NumberLangs setLangsNumber={props.setLangsNumber} langsNumber={props.langsNumber}></NumberLangs>
+        <NumberPages setPagesNumber={props.setPagesNumber} pagesNumber={props.pagesNumber} setModalState={props.setModalState}></NumberPages>
+        <NumberLangs setLangsNumber={props.setLangsNumber} langsNumber={props.langsNumber} setModalState={props.setModalState}></NumberLangs>
       </Panell>
     } else {return []}
 }
@@ -107,7 +94,7 @@ export const ButtonStyle = styled.button`
     vertical-align: middle;
     margin:3px;`
 
-function NumberPages({ setPagesNumber },props) {
+function NumberPages({ setPagesNumber,setModalState }) {
     var increasePages = function IncreasePages() {setPagesNumber(parseInt(localStorage.getItem('pagesNumber'))+1)};
     var decreasePages = function DecreasePages() {if (localStorage.getItem('pagesNumber')>1) {setPagesNumber(parseInt(localStorage.getItem('pagesNumber'))-1)}}
     return <div>
@@ -115,19 +102,19 @@ function NumberPages({ setPagesNumber },props) {
         <ButtonStyle onClick={decreasePages}>-</ButtonStyle>
         <input type='text' inputmode='numeric' pattern='[0-9]*' id='pages' name='pages' defaultValue={localStorage.getItem('pagesNumber')} onChange={e => setPagesNumber(document.getElementById('pages').value)}></input>
         <ButtonStyle onClick={increasePages}>+</ButtonStyle>
-        <PopupInformation text='En este campo debe introducir el número de páginas que tendrá el sitio web.'/>
+        <OpenInfoButton text='Debe indicar el número de páginas que tendrá el sitio web' setModalState={setModalState}/>
     </div>
 }
 
-function NumberLangs({ setLangsNumber },props) {
+function NumberLangs({ setLangsNumber,setModalState }) {
     var increaseLangs = function IncreaseLangs() {setLangsNumber(parseInt(localStorage.getItem('langsNumber'))+1)}
     var decreaseLangs = function DecreaseLangs() {if (localStorage.getItem('langsNumber')>1) {setLangsNumber(parseInt(localStorage.getItem('langsNumber'))-1)}}
-    return <>
+    return <div>
         <label for='number'>Número de idiomas </label>
         <ButtonStyle onClick={decreaseLangs}>-</ButtonStyle>
         <input type='text' inputmode='numeric' pattern='[0-9]*' id='langs' name='langs' defaultValue={localStorage.getItem('langsNumber')} onChange={e => setLangsNumber(document.getElementById('langs').value)}></input>
         <ButtonStyle onClick={increaseLangs}>+</ButtonStyle>
-        <PopupInformation text='En este campo debe introducir el número de idiomas a los que estará traducido el sitio web.'/>
-    </>
+        <OpenInfoButton text='Debe indicar a cuantos idiomas estará traducido el sitio web' setModalState={setModalState}/>
+    </div>
 
 }

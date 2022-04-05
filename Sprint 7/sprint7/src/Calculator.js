@@ -1,8 +1,11 @@
 import React from "react"
-import {WebButton, SeoButton, AdsButton, TotalPrice, PanellRender, ButtonStyle} from "./buttons";
+import {WebButton, SeoButton, AdsButton, TotalPrice, PanellRender, ButtonStyle, PopupInformation} from "./buttons";
 import {Link} from 'react-router-dom';
 
+
 export default function Calculator() {
+  
+  var [modalState, setModalState] = React.useState(false)
   var [webState, setWebState] = React.useState(() => {
     let saved = localStorage.getItem("webState");
     // If the checkbox was true in local storage, then keep true, if there is not local storage or it was false, then keep false
@@ -49,10 +52,11 @@ export default function Calculator() {
   return <div className="App">
     <p>¿Qué quieres hacer?</p>
     <WebButton setWebState={setWebState} webState={webState}></WebButton>
-    <PanellRender webState={webState} setPagesNumber={setPagesNumber} pagesNumber={pagesNumber} setLangsNumber={setLangsNumber} langsNumber={langsNumber}></PanellRender>
+    <PanellRender setModalState={setModalState} webState={webState} setPagesNumber={setPagesNumber} pagesNumber={pagesNumber} setLangsNumber={setLangsNumber} langsNumber={langsNumber}></PanellRender>
     <SeoButton setSeoState={setSeoState} seoState={seoState}></SeoButton>
     <AdsButton setAdsState={setAdsState} adsState={adsState}></AdsButton>
     <TotalPrice webState={webState} seoState={seoState} adsState={adsState} pagesNumber={pagesNumber} langsNumber={langsNumber} totalPrice={totalPrice}></TotalPrice>
     <ButtonStyle><Link to='/'>Back</Link></ButtonStyle>
+    <PopupInformation modalState={modalState} setModalState={setModalState}></PopupInformation>
     </div>
 }
