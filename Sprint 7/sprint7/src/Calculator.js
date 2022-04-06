@@ -22,14 +22,14 @@ export default function Calculator() {
   var [pagesNumber, setPagesNumber] = React.useState(() => {
     let saved = localStorage.getItem("pagesNumber");
     // If there is no local storage, then default to 1 (it was false when we had no local storage)
-    if (saved==='false') {
+    if (isNaN(saved)) {
       return 1} else {
       return saved};
   })
   var [langsNumber, setLangsNumber] = React.useState(() => {
     let saved = localStorage.getItem("langsNumber");
     // If there is no local storage, then default to 1 (it was undefined when we have no local storage)
-    if (saved==='undefined') {
+    if (isNaN(saved)) {
       return 1} else {
       return saved};
   })

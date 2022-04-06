@@ -6,16 +6,18 @@ import infoPNG from './img/info40.png';
 
 export function PopupInformation(props) {
   let ModalScreen = () => {return <div className='ModalScreen' onClick={() => props.setModalState(false)}><ModalContent></ModalContent></div>}
-  let ModalContent = () => {return <div className='ModalContent'>Information goes here</div>}
+  let ModalContent = () => {return <div id="Modal" className='ModalContent'>{localStorage.getItem("infoText")}</div>}
   console.log('modalState: ', props.modalState)
   if (props.modalState===true) {
     return <><ModalScreen/></>
   } else {return null}
 };
 
-function OpenInfoButton({ setModalState }) {
+function OpenInfoButton({ setModalState,text }) {
+  let OpenInfo = () => {setModalState(true);
+    localStorage.setItem('infoText',text)}
   return <>
-      <img onClick={() => setModalState(true)} src={infoPNG}/>
+      <img onClick={OpenInfo} src={infoPNG}/>
   </>
 }
 
