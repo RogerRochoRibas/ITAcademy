@@ -73,3 +73,15 @@ img {
   color:black;
   border-radius: 20px;
 }
+
+#createdBudgets {
+  width: 200px;
+  position: fixed;
+  left: 50px;
+  top:50px;
+  background-color: #fefefe;
+  padding: 20px;
+  border: 2px solid rgb(0, 0, 0);
+  color:black;
+  border-radius: 20px;
+}

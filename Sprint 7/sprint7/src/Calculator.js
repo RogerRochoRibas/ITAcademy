@@ -1,10 +1,11 @@
 import React from "react"
-import {WebButton, SeoButton, AdsButton, TotalPrice, PanellRender, ButtonStyle, PopupInformation} from "./buttons";
+import {WebButton, SeoButton, AdsButton, TotalPrice, PanellRender, ButtonStyle, PopupInformation, ClientName, BudgetName, Submit} from "./buttons";
 import {Link} from 'react-router-dom';
 
 
 export default function Calculator() {
   
+  let Budget = [{totalPrice,webState,seoState,adsState,pagesNumber,langsNumber,totalPrice}]
   var [modalState, setModalState] = React.useState(false)
   var [webState, setWebState] = React.useState(() => {
     let saved = localStorage.getItem("webState");
@@ -21,14 +22,12 @@ export default function Calculator() {
   })
   var [pagesNumber, setPagesNumber] = React.useState(() => {
     let saved = localStorage.getItem("pagesNumber");
-    // If there is no local storage, then default to 1 (it was false when we had no local storage)
     if (isNaN(saved)) {
       return 1} else {
       return saved};
   })
   var [langsNumber, setLangsNumber] = React.useState(() => {
     let saved = localStorage.getItem("langsNumber");
-    // If there is no local storage, then default to 1 (it was undefined when we have no local storage)
     if (isNaN(saved)) {
       return 1} else {
       return saved};
@@ -46,16 +45,20 @@ export default function Calculator() {
       localStorage.setItem('seoState',seoState)
       localStorage.setItem('adsState',adsState)
       localStorage.setItem('pagesNumber',pagesNumber)
+      localStorage.setItem('totalPrice',totalPrice)
       localStorage.setItem('langsNumber',langsNumber)
     },[[webState, seoState, adsState, pagesNumber, langsNumber]]);
     
   return <div className="App">
-    <p>¿Qué quieres hacer?</p>
+    <h2>¿Qué quieres hacer?</h2>
     <WebButton setWebState={setWebState} webState={webState}></WebButton>
     <PanellRender setModalState={setModalState} webState={webState} setPagesNumber={setPagesNumber} pagesNumber={pagesNumber} setLangsNumber={setLangsNumber} langsNumber={langsNumber}></PanellRender>
     <SeoButton setSeoState={setSeoState} seoState={seoState}></SeoButton>
     <AdsButton setAdsState={setAdsState} adsState={adsState}></AdsButton>
     <TotalPrice webState={webState} seoState={seoState} adsState={adsState} pagesNumber={pagesNumber} langsNumber={langsNumber} totalPrice={totalPrice}></TotalPrice>
+    <ClientName/>
+    <BudgetName/>
+    <Submit Budget={Budget} webState={webState} seoState={seoState} adsState={adsState} pagesNumber={pagesNumber} langsNumber={langsNumber} totalPrice={totalPrice}>Guardar Presupuesto</Submit>
     <ButtonStyle><Link to='/'>Back</Link></ButtonStyle>
     <PopupInformation modalState={modalState} setModalState={setModalState}></PopupInformation>
     </div>

@@ -4,10 +4,42 @@ import infoPNG from './img/info40.png';
 
 
 
+export function Submit({webState, seoState, adsState, pagesNumber, langsNumber, totalPrice, Budget}) {
+  let SaveBudget = () => {alert('submited')}
+  return <>
+    <div><ButtonStyle onClick={e => {SaveBudget()}}>Guardar Presupuesto</ButtonStyle></div>
+    <div id='createdBudgets'>
+      <h3>Budgets: </h3>
+      {Budget.map(e => (<div key={e.totalPrice}>{e.totalPrice}</div>))}
+    </div>
+  </>
+}
+
+export function ClientName() {
+  var [clientName, setClientName] = React.useState(() => {
+    let saved = localStorage.getItem("clientName");
+      if (saved==='undefined') {return 'Cliente 1'} else {return saved};
+  })
+  localStorage.setItem('clientName',clientName)
+  return <p>
+    <label for='clientName'>Nombre del cliente </label>
+    <input type='text' inputmode='text' id='clientName' name='clientName' defaultValue={localStorage.getItem('clientName')} onChange={e => setClientName(document.getElementById('clientName').value)}/>
+  </p>}
+
+export function BudgetName() {
+  var [budgetName, setbudgetName] = React.useState(() => {
+    let saved = localStorage.getItem("budgetName");
+      if (saved==='undefined' || saved==='null') {return 'Presupuesto 1'} else {return saved};
+  })
+  localStorage.setItem('budgetName',budgetName)
+  return <p>
+    <label for='budgetName'>Nombre del presupuesto </label>
+    <input type='text' inputmode='text' id='budgetName' name='budgetName' defaultValue={localStorage.getItem('budgetName')} onChange={e => setbudgetName(document.getElementById('budgetName').value)}/>
+  </p>}
+
 export function PopupInformation(props) {
   let ModalScreen = () => {return <div className='ModalScreen' onClick={() => props.setModalState(false)}><ModalContent></ModalContent></div>}
   let ModalContent = () => {return <div id="Modal" className='ModalContent'>{localStorage.getItem("infoText")}</div>}
-  console.log('modalState: ', props.modalState)
   if (props.modalState===true) {
     return <><ModalScreen/></>
   } else {return null}
@@ -22,25 +54,22 @@ function OpenInfoButton({ setModalState,text }) {
 }
 
 export function WebButton({ setWebState,webState }) {
-    return <>
-        <input type='checkbox' id='web' name='web' checked={webState} onChange={e => setWebState(document.getElementById('web').checked)}></input>
+    return <p>
+        <input type='checkbox' id='web' name='web' checked={webState} onChange={e => setWebState(document.getElementById('web').checked)}/>
         <label for='web'>Una página web (500€)</label>
-        <br></br>
-    </>
+    </p>
 }
 export function SeoButton({ setSeoState,seoState }) {
-    return <>
-        <input type='checkbox' id='seo' name='seo' checked={seoState} onChange={e => setSeoState(document.getElementById('seo').checked)}></input>
+    return <p>
+        <input type='checkbox' id='seo' name='seo' checked={seoState} onChange={e => setSeoState(document.getElementById('seo').checked)}/>
         <label for='seo'>Una consultoría SEO (300€)</label>
-        <br></br>
-    </>
+    </p>
 }
 export function AdsButton({ setAdsState,adsState }) {
-    return <>
-        <input type='checkbox' id='ads' name='ads' checked={adsState} onChange={e => setAdsState(document.getElementById('ads').checked)}></input>
+    return <p>
+        <input type='checkbox' id='ads' name='ads' checked={adsState} onChange={e => setAdsState(document.getElementById('ads').checked)}/>
       <label for='ads'>Una campaña de Google Ads (200€)</label>
-      <br></br>
-    </>
+    </p>
 }
 export function TotalPrice(props) {
     var [totalPrice, setTotalPrice] = React.useState(0)
@@ -72,8 +101,8 @@ export function PanellRender(props) {
     `
     if (props.webState) {
       return <Panell>
-        <NumberPages setPagesNumber={props.setPagesNumber} pagesNumber={props.pagesNumber} setModalState={props.setModalState}></NumberPages>
-        <NumberLangs setLangsNumber={props.setLangsNumber} langsNumber={props.langsNumber} setModalState={props.setModalState}></NumberLangs>
+        <NumberPages setPagesNumber={props.setPagesNumber} pagesNumber={props.pagesNumber} setModalState={props.setModalState}/>
+        <NumberLangs setLangsNumber={props.setLangsNumber} langsNumber={props.langsNumber} setModalState={props.setModalState}/>
       </Panell>
     } else {return []}
 }
@@ -102,7 +131,7 @@ function NumberPages({ setPagesNumber,setModalState }) {
     return <div>
         <label for='number'>Número de páginas </label>
         <ButtonStyle onClick={decreasePages}>-</ButtonStyle>
-        <input type='text' inputmode='numeric' pattern='[0-9]*' id='pages' name='pages' defaultValue={localStorage.getItem('pagesNumber')} onChange={e => setPagesNumber(document.getElementById('pages').value)}></input>
+        <input type='text' inputmode='numeric' pattern='[0-9]*' id='pages' name='pages' defaultValue={localStorage.getItem('pagesNumber')} onChange={e => setPagesNumber(document.getElementById('pages').value)}/>
         <ButtonStyle onClick={increasePages}>+</ButtonStyle>
         <OpenInfoButton text='Debe indicar el número de páginas que tendrá el sitio web' setModalState={setModalState}/>
     </div>
@@ -114,7 +143,7 @@ function NumberLangs({ setLangsNumber,setModalState }) {
     return <div>
         <label for='number'>Número de idiomas </label>
         <ButtonStyle onClick={decreaseLangs}>-</ButtonStyle>
-        <input type='text' inputmode='numeric' pattern='[0-9]*' id='langs' name='langs' defaultValue={localStorage.getItem('langsNumber')} onChange={e => setLangsNumber(document.getElementById('langs').value)}></input>
+        <input type='text' inputmode='numeric' pattern='[0-9]*' id='langs' name='langs' defaultValue={localStorage.getItem('langsNumber')} onChange={e => setLangsNumber(document.getElementById('langs').value)}/>
         <ButtonStyle onClick={increaseLangs}>+</ButtonStyle>
         <OpenInfoButton text='Debe indicar a cuantos idiomas estará traducido el sitio web' setModalState={setModalState}/>
     </div>
