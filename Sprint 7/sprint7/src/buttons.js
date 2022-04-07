@@ -7,12 +7,14 @@ import infoPNG from './img/info40.png';
 export function Submit({webState, seoState, adsState, pagesNumber, langsNumber, totalPrice, Budget}) {
   let SaveBudget = () => {alert('submited')}
   return <>
-    <div><ButtonStyle onClick={e => {SaveBudget()}}>Guardar Presupuesto</ButtonStyle></div>
-    <div id='createdBudgets'>
-      <h3>Budgets: </h3>
-      {Budget.map(e => (<div key={e.totalPrice}>{e.totalPrice}</div>))}
-    </div>
+    <div><ButtonStyle onClick={e => {SaveBudget()}}>Guardar Presupuesto</ButtonStyle></div> 
   </>
+}
+
+export function BudgetList(){
+  return <div id='createdBudgets'>
+  <h3>Budgets: </h3>
+</div>
 }
 
 export function ClientName() {

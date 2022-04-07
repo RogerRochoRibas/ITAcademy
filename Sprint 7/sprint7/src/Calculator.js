@@ -1,5 +1,5 @@
 import React from "react"
-import {WebButton, SeoButton, AdsButton, TotalPrice, PanellRender, ButtonStyle, PopupInformation, ClientName, BudgetName, Submit} from "./buttons";
+import {WebButton, SeoButton, AdsButton, TotalPrice, PanellRender, ButtonStyle, PopupInformation, ClientName, BudgetName, Submit, BudgetList} from "./buttons";
 import {Link} from 'react-router-dom';
 
 
@@ -60,6 +60,7 @@ export default function Calculator() {
     <BudgetName/>
     <Submit Budget={Budget} webState={webState} seoState={seoState} adsState={adsState} pagesNumber={pagesNumber} langsNumber={langsNumber} totalPrice={totalPrice}>Guardar Presupuesto</Submit>
     <ButtonStyle><Link to='/'>Back</Link></ButtonStyle>
+    <BudgetList/>
     <PopupInformation modalState={modalState} setModalState={setModalState}></PopupInformation>
     </div>
 }
