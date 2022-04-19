@@ -16,7 +16,7 @@ export const ButtonStyle = styled.button`
     padding: 10px 12px;
     text-align: center;
     vertical-align: middle;
-    margin:3px;`
+    margin:4px;`
 
 export function Button(props) {
     return <p>
@@ -26,14 +26,19 @@ export function Button(props) {
 }
 
 export function InputNumber(props) {
-    function NumberButton(props) {
-        props.UpdateBudget(props.field,props.field-1);
-        document.getElementById(props.field).value=1
+    let oldNumber = props.Budget[props.field]
+    if (props.Budget['web']) {
+        return <div>
+            <label for={props.field}>{props.text} </label><br></br>
+            <ButtonStyle onClick={e => props.UpdateBudget(props.field,oldNumber-1)}>-</ButtonStyle>
+            <input type='text' inputMode='numeric' id={props.field} name={props.field} value={props.Budget[props.field]} onChange={e => props.UpdateBudget(props.field,e.target.value)}/>
+            <ButtonStyle onClick={e => props.UpdateBudget(props.field,oldNumber+1)}>+</ButtonStyle>
+        </div>
     }
+}
+
+export function DisplayBudget(props) {
     return <div>
-        <label for={props.field}>{props.text}</label>
-        <ButtonStyle onClick={e => props.UpdateBudget(props.field,props.field-1)}>-</ButtonStyle>
-        <input type='text' inputMode='numeric' pattern='[0-9]*' id={props.field} name={props.field} defaultValue='1' onChange={e => props.UpdateBudget(props.field,document.getElementById(props.field).value)}/>
-        <ButtonStyle onClick={e => props.UpdateBudget(props.field,props.field+1)}>+</ButtonStyle>
+        <p>Total Price: {props.Budget['total']}</p>
     </div>
 }
