@@ -5,8 +5,7 @@ import CheckboxList from './CheckboxList'
 import Welcome from './Welcome'
 import { priceCalculator } from './Calculations';
 
-function App() {
-
+function App() { 
   let [Budget, setBudget] = React.useState({'web':false,'seo':false,'ads':false,'pages':1,'langs':1,'total':0}) 
 
   function UpdateBudget(field,value) {
@@ -16,6 +15,11 @@ function App() {
     setBudget(newBudget);
   }
 
+  React.useEffect(()=>{
+    let stringBudget = JSON.stringify(Budget)
+    localStorage.setItem('Budget',stringBudget)
+    },[[Budget]]);
+  
   return (
     <Router>
       <Routes>
