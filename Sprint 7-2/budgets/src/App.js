@@ -11,14 +11,11 @@ function App() {
   function UpdateBudget(field,value) {
     let newBudget = {...Budget};
     newBudget[field]=value;
+    localStorage.setItem(field,value)
     priceCalculator(newBudget);
     setBudget(newBudget);
   }
 
-  React.useEffect(()=>{
-    let stringBudget = JSON.stringify(Budget)
-    localStorage.setItem('Budget',stringBudget)
-    },[[Budget]]);
   
   return (
     <Router>
