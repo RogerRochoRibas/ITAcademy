@@ -5,6 +5,6 @@ export default function Main(props) {
 
     return <div>
         <h2>¿Qué quieres hacer?</h2>
-        <ul>{props.ShipsList}</ul>
+        <ul>{props.Ships}</ul>
     </div>
 }
