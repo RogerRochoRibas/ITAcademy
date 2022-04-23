@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react'
-import {ShipRender} from './starshipsList.js'
+import {ShipRender} from './spaceshipsList.js'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Welcome from './welcome'
 import logo from './sw-logo.png'

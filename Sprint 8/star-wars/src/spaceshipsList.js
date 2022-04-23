@@ -26,7 +26,7 @@ export function ShipRender() {
 
     return (
     <>
-        <h2>Starships</h2>
+        <h2>Spaceships</h2>
         <ul className='starships'>{ships.length > 0? shipList() : loading}</ul> 
     </>)
 }
