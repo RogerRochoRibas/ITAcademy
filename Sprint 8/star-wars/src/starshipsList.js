@@ -15,7 +15,7 @@ export function ShipRender() {
     const shipList = () => {
         if(ships.length > 0) {
             let shipsMounted = ships.map((element) => {
-                    return(<li>Ship: {element.name} Model: {element.model}</li>)
+                    return(<li><h3 className='shipName ship'>{element.name}</h3><p className='shipModel ship'>{element.model}</p></li>)
             })
             console.log('ships is not null: ', ships)
             return shipsMounted;
@@ -26,15 +26,7 @@ export function ShipRender() {
 
     return (
     <>
-        <p>hola</p>
-        <div>{ships.length > 0? shipList() : loading}</div> 
-        ___________
-        <div>{ships.length > 0 && shipList()}</div>
-
-        ___________
-        <div>{ships.length <= 0 || shipList()}</div>
-
-        ___________
-        <div>{!ships.length <= 0 && shipList()}</div>
+        <h2>Starships</h2>
+        <ul className='starships'>{ships.length > 0? shipList() : loading}</ul> 
     </>)
 }

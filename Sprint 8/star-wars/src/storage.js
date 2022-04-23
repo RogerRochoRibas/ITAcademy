@@ -1,9 +1,11 @@
 
-  /*
-  return <Router>
-      <Routes>
-      <Route path='/' element={<Welcome/>}/>
-      <Route path='app' element={<Main Ships={Ships}/>}/>
-      </Routes>
-    </Router>
-  */
+    /*
+    ___________
+    <div>{ships.length > 0 && shipList()}</div>
+
+    ___________
+    <div>{ships.length <= 0 || shipList()}</div>
+
+    ___________
+    <div>{!ships.length <= 0 && shipList()}</div>
+    */
