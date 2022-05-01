@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Welcome from './welcome'
 import logo from './sw-logo.png'
 import {Link} from 'react-router-dom';
+import { ShipDetails } from './shipDetails';
 
 function App() {
   return <Router className='App'>
@@ -18,6 +19,7 @@ function App() {
       <Routes>
       <Route path='/' element={<Welcome/>}/>
       <Route path='app' element={<ShipRender/>}/>
+      <Route path='ship' element={<ShipDetails/>}/>
       </Routes>
     </Router>
 }

@@ -89,3 +89,11 @@ header {
 .ship {
   margin: 7px;
 }
+
+.shipDetailsHide {
+  display:none;
+}
+
+table {
+  padding-left: 3%;
+}
