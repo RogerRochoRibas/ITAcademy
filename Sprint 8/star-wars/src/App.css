@@ -90,8 +90,12 @@ header {
   margin: 7px;
 }
 
-.shipDetailsHide {
+.shipDetails {
   display:none;
+}
+
+.shipDetailsShow {
+  display:block;
 }
 
 table {

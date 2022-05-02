@@ -4,10 +4,11 @@ import classNames from "classnames";
 
 export function ShipRender() {
   const [ships, setShips] = React.useState([]);
+  const [shipImages, setShipImages] = React.useState([]);
   const [details, setDetails] = React.useState([]);
   console.log("details: ", details);
   React.useEffect(() => {
-    fetch("https://swapi.dev/api/starships/")
+    fetch("https://swapi.dev/api/starships")
       .then((response) => response.json())
       .then((ship) => {
         setShips(ship.results);
@@ -21,13 +22,13 @@ export function ShipRender() {
         let active = details === element.name;
         return (
           <li key={element.name}>
-            <div onClick={(e) => setDetails(element.name)}>
+            <div onClick={(e) => {if(details==element.name){setDetails([])} else{setDetails(element.name)}}}>
               <h3 className="shipName ship">{element.name}</h3>
               <h4 className="shipModel ship">{element.model}</h4>
             </div>
             <div
               className={classNames({
-                shipDetailsHide: active,
+                shipDetailsShow: active,
                 shipDetails: true,
               })}
               id={element.name.replace(/ /g, "")}
