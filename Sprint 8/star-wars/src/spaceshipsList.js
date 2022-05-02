@@ -1,24 +1,36 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import classNames from "classnames";
+import { ButtonStyle } from "./inputs";
+import ReactPaginate from 'react-paginate';
 
 export function ShipRender() {
   const [ships, setShips] = React.useState([]);
-  const [shipImages, setShipImages] = React.useState([]);
   const [details, setDetails] = React.useState([]);
-  console.log("details: ", details);
+  const [next, setNext] = React.useState("https://swapi.dev/api/starships/?page=1")
+  
   React.useEffect(() => {
-    fetch("https://swapi.dev/api/starships")
+    fetch(next)
       .then((response) => response.json())
       .then((ship) => {
+        console.log(ship)
         setShips(ship.results);
-        console.log("ship: ", ship.results);
-      });
+        setNext(ship.next);
+      })
   }, []);
+
+  function loadMoreShips() {
+    if(next) {
+    fetch(next)
+      .then((response) => response.json())
+      .then((ship) => {
+        setNext(ship.next);
+        setShips(ship.results);
+      })}
+  }
 
   const shipList = () => {
     if (ships.length > 0) {
-        let shipsMounted = ships.map((element) => {
+      let shipsMounted = ships.map((element) => {
         let active = details === element.name;
         return (
           <li key={element.name}>
@@ -69,7 +81,9 @@ export function ShipRender() {
   return (
     <>
       <h2>Spaceships</h2>
+      <ButtonStyle onClick={loadMoreShips}>View More</ButtonStyle>
       <ul className="starships">{ships.length > 0 ? shipList() : loading}</ul>
+      <ButtonStyle onClick={loadMoreShips}>View More</ButtonStyle>
     </>
   );
 }
