@@ -80,7 +80,7 @@ export function ShipRender() {
 
   return (
     <>
-      <h2>Spaceships</h2>
+      <h2 class='title'>Spaceships</h2>
       <ul className="starships">{ships.length > 0 ? shipList() : loading}</ul>
     </>
   );
