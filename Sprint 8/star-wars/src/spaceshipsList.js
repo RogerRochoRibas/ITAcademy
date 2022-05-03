@@ -1,7 +1,5 @@
 import React from "react";
 import classNames from "classnames";
-import { ButtonStyle } from "./inputs";
-import ReactPaginate from 'react-paginate';
 
 export function ShipRender() {
   const [ships, setShips] = React.useState([]);
@@ -9,14 +7,14 @@ export function ShipRender() {
   const [next, setNext] = React.useState("https://swapi.dev/api/starships/?page=1")
   
   React.useEffect(() => {
-    fetch(next)
-      .then((response) => response.json())
-      .then((ship) => {
-        console.log(ship)
-        setShips(ship.results);
-        setNext(ship.next);
-      })
+    loadMoreShips();
   }, []);
+  
+  window.onscroll = function() {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        loadMoreShips();
+    }
+};
 
   function loadMoreShips() {
     if(next) {
@@ -24,7 +22,9 @@ export function ShipRender() {
       .then((response) => response.json())
       .then((ship) => {
         setNext(ship.next);
-        setShips(ship.results);
+        let newShips = [...ships]
+        newShips.push(...ship.results)
+        setShips(newShips);
       })}
   }
 
@@ -34,7 +34,7 @@ export function ShipRender() {
         let active = details === element.name;
         return (
           <li key={element.name}>
-            <div onClick={(e) => {if(details==element.name){setDetails([])} else{setDetails(element.name)}}}>
+            <div onClick={(e) => {if(details===element.name){setDetails([])} else{setDetails(element.name)}}}>
               <h3 className="shipName ship">{element.name}</h3>
               <h4 className="shipModel ship">{element.model}</h4>
             </div>
@@ -43,7 +43,7 @@ export function ShipRender() {
                 shipDetailsShow: active,
                 shipDetails: true,
               })}
-              id={element.name.replace(/ /g, "")}
+              id={element.name}
             >
                 <table>
                     <tbody>
@@ -81,9 +81,7 @@ export function ShipRender() {
   return (
     <>
       <h2>Spaceships</h2>
-      <ButtonStyle onClick={loadMoreShips}>View More</ButtonStyle>
       <ul className="starships">{ships.length > 0 ? shipList() : loading}</ul>
-      <ButtonStyle onClick={loadMoreShips}>View More</ButtonStyle>
     </>
   );
 }

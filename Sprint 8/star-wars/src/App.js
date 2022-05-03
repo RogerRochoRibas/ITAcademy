@@ -7,8 +7,10 @@ import logo from './sw-logo.png'
 import {Link} from 'react-router-dom';
 
 function App() {
+  
+
   return <Router className='App'>
-    <header><img id='logo' src={logo}/></header>
+    <header><img alt='logo' id='logo' src={logo}/></header>
     <div class="nav">
       <ul>
         <li class="home"><Link to='/'>Home</Link></li>
