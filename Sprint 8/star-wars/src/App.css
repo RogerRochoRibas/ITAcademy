@@ -94,18 +94,6 @@ header {
   margin: 7px;
 }
 
-.shipDetails {
-  display:none;
-}
-
-.shipDetailsShow {
-  display:block;
-}
-
-table {
-  padding-left: 3%;
-}
-
 input[type=text]:focus {
   background-color: #484848;
   color: #edd700;
@@ -127,7 +115,8 @@ input[type=text] {
     line-height: 25.2px;
     text-align: center;
     padding: 0 18px;
-    margin: 14px 0 18px;
+    margin-top: 14px;
+    margin-bottom: 18px;
 }
 
 .nav-log {
@@ -135,4 +124,19 @@ input[type=text] {
   top:10px;
   right:10px;
   width:auto;
+}
+
+table {
+  margin-left: auto;
+  margin-right:auto;
+  width:60%;
+  color:rgb(206, 206, 206);
+}
+
+tbody{
+  text-align: start;
+}
+
+td {
+  padding:0 15px 0 15px;
 }

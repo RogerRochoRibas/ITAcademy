@@ -1,5 +1,5 @@
 import React from "react";
-import classNames from "classnames";
+import {Link} from 'react-router-dom';
 
 export function ShipRender() {
   const [ships, setShips] = React.useState([]);
@@ -30,45 +30,15 @@ export function ShipRender() {
 
   const shipList = () => {
     if (ships.length > 0) {
-      let shipsMounted = ships.map((element) => {
-        let active = details === element.name;
+      let shipsMounted = ships.map((element, index) => {
         return (
-          <li key={element.name}>
+          <li key={index}>
+            <Link to={`/starships/${parseInt(index)+1}`}>
             <div onClick={(e) => {if(details===element.name){setDetails([])} else{setDetails(element.name)}}}>
               <h3 className="shipName ship">{element.name}</h3>
               <h4 className="shipModel ship">{element.model}</h4>
             </div>
-            <div
-              className={classNames({
-                shipDetailsShow: active,
-                shipDetails: true,
-              })}
-              id={element.name}
-            >
-                <table>
-                    <tbody>
-                        <tr>
-                            <td><p>Cost: {element.cost_in_credits}</p></td>
-                            <td><p>Cargo: {element.cargo_capacity}</p></td>
-                        </tr>
-                        <tr>
-                            <td><p>Lenght: {element.length}</p></td>
-                            <td><p>Crew: {element.crew}</p></td>
-                        </tr>
-                        <tr>
-                            <td><p>Passengers: {element.passengers}</p></td>
-                            <td><p>Consumables: {element.consumables}</p></td>
-                        </tr>
-                        <tr>
-                            <td><p>Max Atmosphering Speed: {element.max_atmosphering_speed}</p></td>
-                            <td><p>Hyperdrive Rating: {element.hyperdrive_rating}</p></td>
-                        </tr>
-                        <tr>
-                            <td><p>Manufacturer: {element.manufacturer}</p></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            </Link>
           </li>
         );
       });
