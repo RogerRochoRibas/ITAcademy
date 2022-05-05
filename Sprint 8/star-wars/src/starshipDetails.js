@@ -1,44 +1,35 @@
 import React from "react";
 import { useParams } from 'react-router-dom';
+import App from "./App";
 
-export function StarshipDetails() {
+export function StarshipDetails(props) {
     const id = useParams();
-    const idNumber = parseInt(id.name)+1;
+    const idNumber = parseInt(id.name)-1;
+    const imgNumber = parseInt(id.name)+5;
 
-    const [shipURL, setShipURL] = React.useState(`https://swapi.dev/api/starships/${idNumber}`)
-    const [shipData, setShipData] = React.useState([])
-    const obtainShip = async () => {
-        const currentShip = await fetch(shipURL)
-        const currentShipData = await currentShip.json()
-        setShipData(currentShipData)
-    }
-    React.useEffect(() => {
-        obtainShip();
-    },[])
-
-    return <div className='details' id={shipData.name}>
-                <h2 className='title'>{shipData.name}</h2>
-                <img src={`https://starwars-visualguide.com/assets/img/starships/${idNumber}.jpg`}></img>
+    return <div className='details'>
+                <h2 className='title'>{props.ships[idNumber].name}</h2>
+                <img src={`https://starwars-visualguide.com/assets/img/starships/${imgNumber}.jpg`}></img>
                 <table>
                     <tbody>
                         <tr>
-                            <td><p>Cost: {shipData.cost_in_credits}</p></td>
-                            <td><p>Cargo: {shipData.cargo_capacity}</p></td>
+                            <td><p>Cost: {props.ships[idNumber].cost_in_credits}</p></td>
+                            <td><p>Cargo: {props.ships[idNumber].cargo_capacity}</p></td>
                         </tr>
                         <tr>
-                            <td><p>Lenght: {shipData.length}</p></td>
-                            <td><p>Crew: {shipData.crew}</p></td>
+                            <td><p>Lenght: {props.ships[idNumber].length}</p></td>
+                            <td><p>Crew: {props.ships[idNumber].crew}</p></td>
                         </tr>
                         <tr>
-                            <td><p>Passengers: {shipData.passengers}</p></td>
-                            <td><p>Consumables: {shipData.consumables}</p></td>
+                            <td><p>Passengers: {props.ships[idNumber].passengers}</p></td>
+                            <td><p>Consumables: {props.ships[idNumber].consumables}</p></td>
                         </tr>
                         <tr>
-                            <td><p>Max Atmosphering Speed: {shipData.max_atmosphering_speed}</p></td>
-                            <td><p>Hyperdrive Rating: {shipData.hyperdrive_rating}</p></td>
+                            <td><p>Max Atmosphering Speed: {props.ships[idNumber].max_atmosphering_speed}</p></td>
+                            <td><p>Hyperdrive Rating: {props.ships[idNumber].hyperdrive_rating}</p></td>
                         </tr>
                         <tr>
-                            <td><p>Manufacturer: {shipData.manufacturer}</p></td>
+                            <td><p>Manufacturer: {props.ships[idNumber].manufacturer}</p></td>
                         </tr>
                     </tbody>
                 </table>

@@ -1,23 +1,23 @@
 html {
-  background:black;
-  color:white;
+  background: black;
+  color: white;
   text-align: center;
   min-height: 100vh;
 }
 
 a {
-  color:white;
+  color: white;
   text-decoration: none;
 }
 
 header {
-  padding:10px;
+  padding: 10px;
   background-image: url("sw-background.jpg");
 }
 
 #logo {
   width: auto;
-  max-height:200px
+  max-height: 200px;
 }
 
 .nav ul {
@@ -27,26 +27,26 @@ header {
   margin: 0;
 }
 .nav li {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 1.2em;
   line-height: 40px;
   height: 40px;
   margin: 0px 2px;
-  border-top: 1px  solid rgba(255, 255, 255, 0.500);
-  border-bottom: 1px  solid rgba(255, 255, 255, 0.500);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
- 
+
 .nav a {
   text-decoration: none;
   color: #fff;
   display: block;
-  transition: .3s background-color;
+  transition: 0.3s background-color;
 }
- 
+
 .nav a:hover {
   background-color: #005f5f;
 }
- 
+
 .nav a.active {
   background-color: #fff;
   color: #444;
@@ -57,7 +57,7 @@ header {
   html {
     padding-bottom: 40px;
   }
-  
+
   .nav li {
     width: 150px;
     height: 50px;
@@ -68,38 +68,38 @@ header {
   .nav li {
     display: inline-block;
     margin-right: -4px;
-    border: 1px  solid rgba(255, 255, 255, 0.500);
+    border: 1px solid rgba(255, 255, 255, 0.5);
   }
 
   .nav {
-    border-bottom:1px solid rgba(255, 255, 255, 0.500);
-    border-top:1px solid rgba(255, 255, 255, 0.500);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
   }
 }
 
 .starships {
   list-style: none;
-  margin:0 auto;
-  padding:0;
+  margin: 0 auto;
+  padding: 0;
 }
-.starships>li {
+.starships > li {
   background-color: rgb(24, 24, 24);
-  color:rgb(199, 199, 199);
+  color: rgb(199, 199, 199);
   max-width: 800px;
-  margin:20px auto;
-  padding:10px;
+  margin: 20px auto;
+  padding: 10px;
   text-align: left;
 }
 .ship {
   margin: 7px;
 }
 
-input[type=text]:focus {
+input[type="text"]:focus {
   background-color: #484848;
   color: #edd700;
 }
 
-input[type=text] {
+input[type="text"] {
   border-radius: 3px;
   height: 40px;
   line-height: 40px;
@@ -109,34 +109,81 @@ input[type=text] {
 
 .title {
   color: #edd700;
-    font-size: 25.6px;
-    font-weight: 100;
-    text-transform: uppercase;
-    line-height: 25.2px;
-    text-align: center;
-    padding: 0 18px;
-    margin-top: 14px;
-    margin-bottom: 18px;
+  font-size: 25.6px;
+  font-weight: 100;
+  text-transform: uppercase;
+  line-height: 25.2px;
+  text-align: center;
+  padding: 0 18px;
+  margin-top: 14px;
+  margin-bottom: 18px;
 }
 
 .nav-log {
-  position:absolute;
-  top:10px;
-  right:10px;
-  width:auto;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: auto;
 }
 
 table {
   margin-left: auto;
-  margin-right:auto;
-  width:60%;
-  color:rgb(206, 206, 206);
+  margin-right: auto;
+  width: 60%;
+  color: rgb(206, 206, 206);
 }
 
-tbody{
+tbody {
   text-align: start;
 }
 
 td {
-  padding:0 15px 0 15px;
+  padding: 0 15px 0 15px;
+}
+
+.modal-bg {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.405);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.modal {
+  color: #aaa;
+  padding: 20px 40px;
+  box-shadow: 0 5px 10px 0 rgb(0 0 0 / 30%);
+  width: 400px;
+  border-radius: 10px;
+  position: absolute;
+  top: 40%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  background-color: #181818;
+}
+
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+}
+
+.submit {
+  background: #fcdb4b;
+    color: #000000;
+    border-radius: 2px;
+    padding:8px 12px;
+    border:solid #fcdb4b 3px
+}
+
+.error {
+  color:red;
+  background-color: red;
 }
