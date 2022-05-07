@@ -6,6 +6,7 @@ export function RegisterLogin() {
   const [loginVisible, setLoginVisible] = React.useState(null);
   const [errorName, setErrorName] = React.useState(null);
   const [errorPassword, setErrorPassword] = React.useState(null);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   function showRegister() {
     if (registerVisible) {
@@ -31,30 +32,41 @@ export function RegisterLogin() {
   }
 
   const checkUser = (event) => {
-    event.preventDefault();
     let savedName = localStorage.getItem("name");
     let savedPassword = localStorage.getItem("password");
     let inputName = document.getElementById("inputName").value;
     let inputPassword = document.getElementById("inputPassword").value;
-    let correctName = savedName === inputName
-    let correctPassword = savedPassword === inputPassword
-    if (correctName) {
+    let correctName = savedName === inputName;
+    let correctPassword = savedPassword === inputPassword;
+    if (!correctName) {
       setErrorName(true);
-    } else {setErrorName(false)}
-    if (correctPassword) {
+    } else {
+      setErrorName(false);
+    }
+    if (!correctPassword) {
       setErrorPassword(true);
-    } else {setErrorPassword(false)}
-  }
+    } else {
+      setErrorPassword(false);
+    }
+    if (correctName && correctPassword) {
+      setLoggedIn(true)
+    }
+  };
 
   if (registerVisible) {
     return (
       <div className="modal-bg">
         <div className="modal">
-          <a href="#" title="Close" className="modal-close" onClick={() => showRegister()}>
+          <a
+            href="#"
+            title="Close"
+            className="modal-close"
+            onClick={() => showRegister()}
+          >
             Close
           </a>
           <h2 class="title">Register</h2>
-          <form id="register">
+          <div id="register">
             <p>
               <label>
                 <input
@@ -76,13 +88,14 @@ export function RegisterLogin() {
               </label>
             </p>
             <p>
-              <input className="submit"
-                type="submit"
+              <input
+                className="submit"
+                type="button"
                 value="Submit"
                 onClick={() => updateUser()}
               />
             </p>
-          </form>
+          </div>
         </div>
       </div>
     );
@@ -91,14 +104,20 @@ export function RegisterLogin() {
     return (
       <div className="modal-bg">
         <div className="modal">
-          <a href="#" title="Close" className="modal-close" onClick={() => showLogin()}>
+          <a
+            href="#"
+            title="Close"
+            className="modal-close"
+            onClick={() => showLogin()}
+          >
             Close
           </a>
           <h2 class="title">Login</h2>
-          <form id="login" onsubmit={checkUser}>
+          <form id="login" onSubmit={checkUser}>
             <p>
-              <label >
-                <input className={{'error':errorName}}
+              <label>
+                <input
+                  className={classNames({ error: errorName })}
                   type="text"
                   name="inputName"
                   id="inputName"
@@ -106,9 +125,15 @@ export function RegisterLogin() {
                 />
               </label>
             </p>
+            <p
+              className={classNames("errorTextHide", { errorText: errorName })}
+            >
+              Name not found.
+            </p>
             <p>
               <label>
-                <input className={{'error':errorPassword}}
+                <input
+                  className={classNames({ error: errorPassword })}
                   type="text"
                   name="inputPassword"
                   id="inputPassword"
@@ -116,10 +141,17 @@ export function RegisterLogin() {
                 />
               </label>
             </p>
+            <p
+              className={classNames("errorTextHide", { errorText: errorName })}
+            >
+              Wrong password.
+            </p>
             <p>
-              <input className="submit"
-                type="submit"
+              <input
+                className="submit"
+                type="button"
                 value="Submit"
+                onClick={() => checkUser()}
               />
             </p>
           </form>
@@ -127,11 +159,15 @@ export function RegisterLogin() {
       </div>
     );
   }
-  if (!loginVisible && !registerVisible) {
+  if (!loginVisible && !registerVisible && !loggedIn) {
     return (
       <div>
-        <p onClick={()=>showRegister()}>Register</p>
-        <p onClick={()=>showLogin()}>Login</p>
+        <p className="clickable" onClick={() => showRegister()}>
+          Register
+        </p>
+        <p className="clickable" onClick={() => showLogin()}>
+          Login
+        </p>
       </div>
     );
   }

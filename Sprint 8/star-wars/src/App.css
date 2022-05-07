@@ -95,7 +95,7 @@ header {
 }
 
 input[type="text"]:focus {
-  background-color: #484848;
+  background-color: #2e2e2e;
   color: #edd700;
 }
 
@@ -151,6 +151,10 @@ td {
   z-index: 999;
 }
 
+.clickable {
+  cursor:pointer;
+}
+
 .modal {
   color: #aaa;
   padding: 20px 40px;
@@ -185,5 +189,14 @@ td {
 
 .error {
   color:red;
-  background-color: red;
+  border: solid red 2px;
+}
+
+.errorTextHide {
+  display:none;
+}
+
+.errorText {
+  color:red;
+  display:block;
 }
