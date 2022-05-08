@@ -23,6 +23,17 @@ export function RegisterLogin() {
       setLoginVisible(true);
     }
   }
+
+function fromLoginToRegister() {
+  setLoginVisible(false);
+  setRegisterVisible(true);
+}
+
+function fromRegisterToLogin() {
+  setRegisterVisible(false);
+  setLoginVisible(true);
+}
+
   function updateUser() {
     const inputName = document.getElementById("name").value;
     const inputPassword = document.getElementById("password").value;
@@ -50,6 +61,8 @@ export function RegisterLogin() {
     }
     if (correctName && correctPassword) {
       setLoggedIn(true)
+      setLoginVisible(false)
+      setRegisterVisible(false)
     }
   };
 
@@ -60,12 +73,12 @@ export function RegisterLogin() {
           <a
             href="#"
             title="Close"
-            className="modal-close"
+            className={classNames("modal-close", { hide: !loggedIn })}
             onClick={() => showRegister()}
           >
             Close
           </a>
-          <h2 class="title">Register</h2>
+          <h2 class="title">SIGN UP</h2>
           <div id="register">
             <p>
               <label>
@@ -96,6 +109,8 @@ export function RegisterLogin() {
               />
             </p>
           </div>
+          <p>Already have an account? <span className='link' onClick={()=>fromRegisterToLogin()}>Log In</span>.</p>
+         
         </div>
       </div>
     );
@@ -107,12 +122,13 @@ export function RegisterLogin() {
           <a
             href="#"
             title="Close"
-            className="modal-close"
+            className={classNames("modal-close", { hide: !loggedIn })}
             onClick={() => showLogin()}
           >
             Close
           </a>
           <h2 class="title">Login</h2>
+          <p>You must Log In to see the spaceships.</p>
           <form id="login" onSubmit={checkUser}>
             <p>
               <label>
@@ -126,7 +142,7 @@ export function RegisterLogin() {
               </label>
             </p>
             <p
-              className={classNames("errorTextHide", { errorText: errorName })}
+              className={classNames("hide", { errorText: errorName })}
             >
               Name not found.
             </p>
@@ -142,7 +158,7 @@ export function RegisterLogin() {
               </label>
             </p>
             <p
-              className={classNames("errorTextHide", { errorText: errorName })}
+              className={classNames("hide", { errorText: errorPassword })}
             >
               Wrong password.
             </p>
@@ -154,6 +170,7 @@ export function RegisterLogin() {
                 onClick={() => checkUser()}
               />
             </p>
+            <p>Don't have an account? <span className='link' onClick={()=>fromLoginToRegister()}>SIGN UP</span> for free.</p>
           </form>
         </div>
       </div>
@@ -161,12 +178,11 @@ export function RegisterLogin() {
   }
   if (!loginVisible && !registerVisible && !loggedIn) {
     return (
-      <div>
-        <p className="clickable" onClick={() => showRegister()}>
-          Register
-        </p>
-        <p className="clickable" onClick={() => showLogin()}>
-          Login
+      <div className='RegisterLogin'>
+        <p>
+          <span className="clickable" onClick={() => showLogin()}>LOG IN</span>
+          <span id='separator'> / / </span>
+          <span className="clickable" onClick={() => showRegister()}>SIGN UP</span>
         </p>
       </div>
     );
