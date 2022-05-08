@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import { StarshipDetails } from "./starshipDetails";
 
 function App() {
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [loginVisible, setLoginVisible] = React.useState(null);
   const [ships, setShips] = React.useState([]);
   const [next, setNext] = React.useState(
     "https://swapi.dev/api/starships/?page=1"
@@ -29,7 +31,7 @@ function App() {
   return (
     <Router className="App">
       <header><img alt="logo" id="logo" src={logo} /></header>
-      <div class="nav-log"><RegisterLogin/></div>
+      <div class="nav-log"><RegisterLogin  loggedIn={loggedIn} setLoggedIn={setLoggedIn} loginVisible={loginVisible} setLoginVisible={setLoginVisible}/></div>
       <div class="nav">
         <ul>
           <li><Link to="/">Home</Link></li>
@@ -37,9 +39,9 @@ function App() {
         </ul>
       </div>
       <Routes>
-        <Route path="/starships/:name" element={<StarshipDetails ships={ships} loadMoreShips={loadMoreShips} />}></Route>
+        <Route path="/starships/:name" element={<StarshipDetails ships={ships} loadMoreShips={loadMoreShips}  loggedIn={loggedIn}/>}></Route>
         <Route path="/" element={<Welcome />} />
-        <Route path="app" element={<ShipRender ships={ships} loadMoreShips={loadMoreShips} />}/>
+        <Route path="app" element={<ShipRender ships={ships} loadMoreShips={loadMoreShips} loggedIn={loggedIn} setLoginVisible={setLoginVisible}/>}/>
       </Routes>
     </Router>
   );

@@ -1,12 +1,10 @@
 import React from "react";
 import classNames from "classnames";
 
-export function RegisterLogin() {
+export function RegisterLogin(props) {
   const [registerVisible, setRegisterVisible] = React.useState(null);
-  const [loginVisible, setLoginVisible] = React.useState(null);
   const [errorName, setErrorName] = React.useState(null);
   const [errorPassword, setErrorPassword] = React.useState(null);
-  const [loggedIn, setLoggedIn] = React.useState(false);
 
   function showRegister() {
     if (registerVisible) {
@@ -17,21 +15,21 @@ export function RegisterLogin() {
   }
 
   function showLogin() {
-    if (loginVisible) {
-      setLoginVisible(false);
+    if (props.loginVisible) {
+      props.setLoginVisible(false);
     } else {
-      setLoginVisible(true);
+      props.setLoginVisible(true);
     }
   }
 
 function fromLoginToRegister() {
-  setLoginVisible(false);
+  props.setLoginVisible(false);
   setRegisterVisible(true);
 }
 
 function fromRegisterToLogin() {
   setRegisterVisible(false);
-  setLoginVisible(true);
+  props.setLoginVisible(true);
 }
 
   function updateUser() {
@@ -60,8 +58,8 @@ function fromRegisterToLogin() {
       setErrorPassword(false);
     }
     if (correctName && correctPassword) {
-      setLoggedIn(true)
-      setLoginVisible(false)
+      props.setLoggedIn(true)
+      props.setLoginVisible(false)
       setRegisterVisible(false)
     }
   };
@@ -73,7 +71,7 @@ function fromRegisterToLogin() {
           <a
             href="#"
             title="Close"
-            className={classNames("modal-close", { hide: !loggedIn })}
+            className={classNames("modal-close", { hide: !props.loggedIn })}
             onClick={() => showRegister()}
           >
             Close
@@ -115,14 +113,14 @@ function fromRegisterToLogin() {
       </div>
     );
   }
-  if (loginVisible) {
+  if (props.loginVisible) {
     return (
       <div className="modal-bg">
         <div className="modal">
           <a
             href="#"
             title="Close"
-            className={classNames("modal-close", { hide: !loggedIn })}
+            className={classNames("modal-close", { hide: !props.loggedIn })}
             onClick={() => showLogin()}
           >
             Close
@@ -176,7 +174,7 @@ function fromRegisterToLogin() {
       </div>
     );
   }
-  if (!loginVisible && !registerVisible && !loggedIn) {
+  if (!props.loginVisible && !registerVisible && !props.loggedIn) {
     return (
       <div className='RegisterLogin'>
         <p>

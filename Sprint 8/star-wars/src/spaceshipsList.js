@@ -5,7 +5,7 @@ import App from "./App";
 export function ShipRender(props) {
   
   React.useEffect(() => {
-      props.loadMoreShips()
+      props.loadMoreShips();
   }, []);
   
   window.onscroll = function() {
@@ -30,7 +30,7 @@ export function ShipRender(props) {
           </li>
         );
       });
-      return shipsMounted;
+      if (props.loggedIn) {return shipsMounted} else {props.setLoginVisible(true)};
     }
   };
 
