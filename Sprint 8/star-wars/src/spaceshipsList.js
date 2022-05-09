@@ -7,6 +7,10 @@ export function ShipRender(props) {
   React.useEffect(() => {
       props.loadMoreShips();
   }, []);
+
+  React.useEffect(() => {
+    shipList();
+  },[props.Login['loggedIn']])
   
   window.onscroll = function() {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
@@ -14,9 +18,7 @@ export function ShipRender(props) {
     }
 };
 
-  
-
-  const shipList = () => {
+  function shipList() {
     if (props.ships.length > 0) {
       let shipsMounted = props.ships.map((element, index) => {
         return (
@@ -30,7 +32,7 @@ export function ShipRender(props) {
           </li>
         );
       });
-      if (props.loggedIn) {return shipsMounted} else {props.setLoginVisible(true)};
+      if (props.Login['loggedIn']) {return shipsMounted} else {return <p>You must Log In to see the spaceships.</p>}
     }
   };
 
