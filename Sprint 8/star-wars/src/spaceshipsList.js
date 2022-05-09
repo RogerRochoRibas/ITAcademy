@@ -2,25 +2,22 @@ import React from "react";
 import {Link} from 'react-router-dom';
 import App from "./App";
 
-export function ShipRender(props) {
+export const ShipRender = ({Login,loadMoreShips,ships}) => {
+  let logged = Login['loggedIn']
   
   React.useEffect(() => {
-      props.loadMoreShips();
+    loadMoreShips();
   }, []);
-
-  React.useEffect(() => {
-    shipList();
-  },[props.Login['loggedIn']])
   
   window.onscroll = function() {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-        props.loadMoreShips();
+        loadMoreShips();
     }
 };
 
   function shipList() {
-    if (props.ships.length > 0) {
-      let shipsMounted = props.ships.map((element, index) => {
+    if (ships.length > 0) {
+      let shipsMounted = ships.map((element, index) => {
         return (
           <li key={index}>
             <Link to={`/starships/${parseInt(index)+1}`}>
@@ -32,7 +29,7 @@ export function ShipRender(props) {
           </li>
         );
       });
-      if (props.Login['loggedIn']) {return shipsMounted} else {return <p>You must Log In to see the spaceships.</p>}
+      if (localStorage.getItem("loggedIn")) {return shipsMounted;} else {return <p>You must Log In to see the spaceships.</p>}
     }
   };
 
@@ -41,7 +38,7 @@ export function ShipRender(props) {
   return (
     <>
       <h2 class='title'>Spaceships</h2>
-      <ul className="starships">{props.ships.length > 0 ? shipList() : loading}</ul>
+      <ul className="starships">{ships.length > 0 ? shipList() : loading}</ul>
     </>
   );
 }

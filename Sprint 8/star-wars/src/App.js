@@ -9,12 +9,12 @@ import { Link } from "react-router-dom";
 import { StarshipDetails } from "./starshipDetails";
 
 function App() {
-  const [Login, setLogin] = React.useState({'loggedIn':null,'loginVisible':null}) 
+  const [Login, setLogin] = React.useState({'loggedIn':false,'loginVisible':false,'registerVisible':false}) 
   function UpdateLogin(field,value) {
     let newLogin = {...Login};
     newLogin[field]=value;
     setLogin(newLogin);
-    console.log('updated: ', field ,' with ', value)
+    console.log('updated:', field ,'to', value)
   }
 
   const [ships, setShips] = React.useState([]);
@@ -35,21 +35,22 @@ function App() {
   }
 
   return (
+    <>
     <Router className="App">
       <header><img alt="logo" id="logo" src={logo} /></header>
       <div class="nav-log"><RegisterLogin Login={Login} UpdateLogin={UpdateLogin}/></div>
-      <div class="nav">
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="app">Spaceships</Link></li>
-        </ul>
+	    <div class="nav">
+	    <ul>
+	      <li><Link to="/">Home</Link></li>
+	      <li><Link to="app">Spaceships</Link></li>
+	    </ul>
       </div>
       <Routes>
         <Route path="/starships/:name" element={<StarshipDetails ships={ships} loadMoreShips={loadMoreShips} Login={Login} UpdateLogin={UpdateLogin}/>}></Route>
         <Route path="/" element={<Welcome />} />
-        <Route path="app" element={<ShipRender ships={ships} loadMoreShips={loadMoreShips} Login={Login} UpdateLogin={UpdateLogin}/>}/>
+        <Route path="app" element={<ShipRender ships={ships} loadMoreShips={loadMoreShips} Login={Login}/>}/>
       </Routes>
-    </Router>
+    </Router></>
   );
 }
 
