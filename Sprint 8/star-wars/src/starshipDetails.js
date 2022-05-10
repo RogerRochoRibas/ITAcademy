@@ -6,7 +6,7 @@ export function StarshipDetails(props) {
     const id = useParams();
     const idNumber = parseInt(id.name)-1;
     const imgNumber = parseInt(id.name)+5;
-    if (props.Login['loggedIn']) {
+    if (props.loggedIn) {
     return <div className='details'>
                 <h2 className='title'>{props.ships[idNumber].name}</h2>
                 <img alt='the starship in space' src={`https://starwars-visualguide.com/assets/img/starships/${imgNumber}.jpg`}></img>

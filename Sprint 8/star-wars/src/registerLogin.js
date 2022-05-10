@@ -10,6 +10,8 @@ export const RegisterLogin = (props) => {
   const [ErrorName, setErrorName] = React.useState(false);
   const [ErrorPassword, setErrorPassword] = React.useState(false);
 
+  
+
   function logOut() {
     localStorage.setItem("loggedIn", false);
     setLogged(false);
@@ -17,11 +19,12 @@ export const RegisterLogin = (props) => {
   }
 
   async function RegistrationSuccess() {
+    setRegisterScreen(false);
     setSuccessScreen(true);
     await new Promise((resolve) => {
       setTimeout(() => {
         resolve(setSuccessScreen(false));
-      }, 300000);
+      }, 4000);
     });
   }
 
@@ -61,7 +64,7 @@ export const RegisterLogin = (props) => {
   const RegisterRender = () => {
     if (RegisterScreen) {
       return (
-        <div className="modal-bg">
+        <div className="modal-bg itop-rght">
           <div className="modal">
             <p
               className="modal-close clickable"
@@ -108,7 +111,7 @@ export const RegisterLogin = (props) => {
   const LoginRender = () => {
     if (LoginScreen) {
       return (
-        <div className="modal-bg">
+        <div className="modal-bg full-screen">
           <div className="modal">
             <p
               className={"modal-close clickable"}
@@ -186,13 +189,13 @@ export const RegisterLogin = (props) => {
   const LogOutRender = () => {
     if (Logged) {
       return (
-        <div className="modal-bg">
+        <div className="top-right">
           <div className="RegisterLogin">
             <p>{localStorage.getItem("name")}</p>
             <p className="clickable" onClick={() => logOut()}>
               LOG OUT
             </p>
-          </div>{" "}
+          </div>
         </div>
       );
     }
@@ -202,8 +205,8 @@ export const RegisterLogin = (props) => {
       <div className={classNames("modal", { hide: !SuccessScreen })}>
         <h2 class="title">Registration Successful</h2>
         <div id="register">
-          <p>Good Job {localStorage.getItem("name")}</p>
-          <p>Now you can log in to see the Starships.</p>
+          <p>Your user name is {localStorage.getItem("name")}</p>
+          <p>Now you can log in to see the Spaceships.</p>
         </div>
       </div>
     );

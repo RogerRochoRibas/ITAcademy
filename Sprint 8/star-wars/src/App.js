@@ -9,7 +9,7 @@ import logo from "./sw-logo.png";
 import { StarshipDetails } from "./starshipDetails";
 
 function App() {
-  const [loggedIn, setLogedIn] = React.useState(false);
+  const [loggedIn, setLogedIn] = React.useState(localStorage.getItem("loggedIn"));
   const [ships, setShips] = React.useState([]);
   const [next, setNext] = React.useState(
     "https://swapi.dev/api/starships/?page=1"
@@ -23,9 +23,17 @@ function App() {
           let newShips = [...ships];
           newShips.push(...ship.results);
           setShips(newShips);
+          console.log(ship.results[1].films)
         });
     }
   }
+
+  React.useEffect(()=>{
+    let loged = localStorage.getItem("loggedIn");
+    if (loged) {
+    setLogedIn(loged)}
+    console.log('loggedin: ',loggedIn,'loged: ',loged)
+  },[])
 
   return (
     <>
@@ -39,7 +47,7 @@ function App() {
 	    </ul>
       </div>
       <Routes>
-        <Route path="/starships/:name" element={<StarshipDetails ships={ships} loadMoreShips={loadMoreShips}/>}></Route>
+        <Route path="/starships/:name" element={<StarshipDetails loggedIn={loggedIn} ships={ships} loadMoreShips={loadMoreShips}/>}></Route>
         <Route path="/" element={<Welcome />} />
         <Route path="app" element={<ShipRender loggedIn={loggedIn} ships={ships} loadMoreShips={loadMoreShips}/>}/>
       </Routes>
