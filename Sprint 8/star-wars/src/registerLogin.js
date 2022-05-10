@@ -3,27 +3,25 @@ import classNames from "classnames";
 import App from "./App";
 
 export const RegisterLogin = (props) => {
-  const [Logged, setLogged] = React.useState(false)
-  const [LoginScreen, setLoginScreen] = React.useState(false)
-  const [RegisterScreen, setRegisterScreen] = React.useState(false)
-  const [ErrorName, setErrorName] = React.useState(false)
-  const [ErrorPassword, setErrorPassword] = React.useState(false)
-  
+  const [Logged, setLogged] = React.useState(false);
+  const [LoginScreen, setLoginScreen] = React.useState(false);
+  const [RegisterScreen, setRegisterScreen] = React.useState(false);
+  const [SuccessScreen, setSuccessScreen] = React.useState(false);
+  const [ErrorName, setErrorName] = React.useState(false);
+  const [ErrorPassword, setErrorPassword] = React.useState(false);
+
   function logOut() {
     localStorage.setItem("loggedIn", false);
     setLogged(false);
-  }
-
-  function changeRegisterLogin(register,login) {
-    setRegisterScreen(register);
-    setLoginScreen(login);
+    props.setLogedIn(false);
   }
 
   async function RegistrationSuccess() {
+    setSuccessScreen(true);
     await new Promise((resolve) => {
       setTimeout(() => {
-        resolve('alert("Registration completed");');
-      }, 5000);
+        resolve(setSuccessScreen(false));
+      }, 300000);
     });
   }
 
@@ -32,7 +30,7 @@ export const RegisterLogin = (props) => {
     const inputPassword = document.getElementById("password").value;
     localStorage.setItem("name", inputName);
     localStorage.setItem("password", inputPassword);
-    alert("Registration completed");
+    RegistrationSuccess();
   }
 
   const checkUser = () => {
@@ -57,159 +55,164 @@ export const RegisterLogin = (props) => {
       setLogged(true);
       setLoginScreen(false);
       setRegisterScreen(false);
+      props.setLogedIn(true);
     }
   };
-
-  if (RegisterScreen) {
-    return (
-      <div className="modal-bg">
-        <div className="modal">
-          <p
-            className="modal-close"
-            onClick={() => setRegisterScreen(false)}
-          >
-            Close
-          </p>
-          <h2 class="title">SIGN UP</h2>
-          <button onClick={() =>console.log('login: ', Logged,'LoginScreen: ',LoginScreen,'RegisterScreen: ',RegisterScreen)}>LogData</button>
-        <div id="register">
-            <p>
-              <label>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="User Name"
-                />
-              </label>
+  const RegisterRender = () => {
+    if (RegisterScreen) {
+      return (
+        <div className="modal-bg">
+          <div className="modal">
+            <p
+              className="modal-close clickable"
+              onClick={() => setRegisterScreen(false)}
+            >
+              Close
             </p>
-            <p>
-              <label>
+            <h2 class="title">SIGN UP</h2>
+            <div id="register">
+              <p>
+                <label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="User Name"
+                  />
+                </label>
+              </p>
+              <p>
+                <label>
+                  <input
+                    type="text"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                  />
+                </label>
+              </p>
+              <p>
                 <input
-                  type="text"
-                  name="password"
-                  id="password"
-                  placeholder="Password"
+                  className="submit clickable"
+                  type="button"
+                  value="Submit"
+                  onClick={() => updateUser()}
                 />
-              </label>
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  };
+  const LoginRender = () => {
+    if (LoginScreen) {
+      return (
+        <div className="modal-bg">
+          <div className="modal">
+            <p
+              className={"modal-close clickable"}
+              onClick={() => setLoginScreen(false)}
+            >
+              Close
             </p>
+            <h2 class="title">Login</h2>
+            <p>You must Log In to see the spaceships.</p>
+            <form id="login" onSubmit={checkUser}>
+              <p>
+                <label>
+                  <input
+                    className={classNames({ error: ErrorName })}
+                    type="text"
+                    name="inputName"
+                    id="inputName"
+                    placeholder="User Name"
+                  />
+                </label>
+              </p>
+              <p className={classNames("hide", { errorText: ErrorName })}>
+                Name not found.
+              </p>
+              <p>
+                <label>
+                  <input
+                    className={classNames({ error: ErrorPassword })}
+                    type="text"
+                    name="inputPassword"
+                    id="inputPassword"
+                    placeholder="Password"
+                  />
+                </label>
+              </p>
+              <p className={classNames("hide", { errorText: ErrorPassword })}>
+                Wrong password.
+              </p>
+              <p>
+                <input
+                  className="submit clickable"
+                  type="button"
+                  value="Submit"
+                  onClick={() => checkUser()}
+                />
+              </p>
+            </form>
+          </div>
+        </div>
+      );
+    }
+  };
+  const LoginMenu = () => {
+    if (!Logged) {
+      return (
+        <div class="nav-log">
+          <div className="RegisterLogin">
             <p>
-              <input
-                className="submit"
-                type="button"
-                value="Submit"
-                onClick={() => updateUser()}
-              />
+              <span className="clickable" onClick={() => setLoginScreen(true)}>
+                LOG IN
+              </span>
+              <span id="separator"> / / </span>
+              <span
+                className="clickable"
+                onClick={() => setRegisterScreen(true)}
+              >
+                SIGN UP
+              </span>
             </p>
           </div>
-          <p>
-            Already have an account?{" "}
-            <span className="link" onClick={() => changeRegisterLogin(true,false)}>
-              Log In
-            </span>
-            .
-          </p>
+        </div>
+      );
+    }
+  };
+  const LogOutRender = () => {
+    if (Logged) {
+      return (
+        <div className="modal-bg">
+          <div className="RegisterLogin">
+            <p>{localStorage.getItem("name")}</p>
+            <p className="clickable" onClick={() => logOut()}>
+              LOG OUT
+            </p>
+          </div>{" "}
+        </div>
+      );
+    }
+  };
+  const RegisterDone = () => {
+    return (
+      <div className={classNames("modal", { hide: !SuccessScreen })}>
+        <h2 class="title">Registration Successful</h2>
+        <div id="register">
+          <p>Good Job {localStorage.getItem("name")}</p>
+          <p>Now you can log in to see the Starships.</p>
         </div>
       </div>
     );
-  }
-
-  if (LoginScreen) {
-    return (
-      <div className="modal-bg">
-        <div className="modal">
-          <p
-            className={"modal-close"}
-            onClick={() => setLoginScreen(false)}
-          >
-            Close
-          </p>
-          <h2 class="title">Login</h2>
-          <button onClick={()=>console.log('login: ', Logged,'LoginScreen: ',LoginScreen,'RegisterScreen: ',RegisterScreen,'Logged: ',Logged)}>LogData</button>
-        <p>You must Log In to see the spaceships.</p>
-          <form id="login" onSubmit={checkUser}>
-            <p>
-              <label>
-                <input
-                  className={classNames({ error: ErrorName })}
-                  type="text"
-                  name="inputName"
-                  id="inputName"
-                  placeholder="User Name"
-                />
-              </label>
-            </p>
-            <p className={classNames("hide", { errorText: ErrorName })}>
-              Name not found.
-            </p>
-            <p>
-              <label>
-                <input
-                  className={classNames({ error: ErrorPassword })}
-                  type="text"
-                  name="inputPassword"
-                  id="inputPassword"
-                  placeholder="Password"
-                />
-              </label>
-            </p>
-            <p className={classNames("hide", { errorText: ErrorPassword })}>
-              Wrong password.
-            </p>
-            <p>
-              <input
-                className="submit"
-                type="button"
-                value="Submit"
-                onClick={() => checkUser()}
-              />
-            </p>
-            <p>
-              Don't have an account?{" "}
-              <span className="link" onClick={() => changeRegisterLogin(false,true)}>
-                SIGN UP
-              </span>{" "}
-              for free.
-            </p>
-          </form>
-        </div>
-      </div>
-    );
-  }
-  if (!Logged) {
-    return (
-      <>
-        <div className="RegisterLogin">
-          <p>
-            <span
-              className="clickable"
-              onClick={() => setLoginScreen(true)}
-            >
-              LOG IN
-            </span>
-            <span id="separator"> / / </span>
-            <span
-              className="clickable"
-              onClick={() => setRegisterScreen(true)}
-            >
-              SIGN UP
-            </span>
-          </p>
-          <button onClick={()=>console.log('login: ', Logged,'LoginScreen: ',LoginScreen,'RegisterScreen: ',RegisterScreen,'Logged: ',Logged)}>LogData</button>
-       </div>
-      </>
-    );
-  } if (Logged) {
-    return (
-      <>
-        <div className="RegisterLogin">
-          <p>{localStorage.getItem("name")}</p>
-          <p className="clickable" onClick={() => logOut()}>
-            LOG OUT
-          </p>
-        </div>
-        <button onClick={()=>console.log('login: ', Logged,'LoginScreen: ',LoginScreen,'RegisterScreen: ',RegisterScreen,'Logged: ',Logged)}>LogData</button>
-       </>
-    );
-  }
+  };
+  return <>
+  <RegisterRender/>
+  <LoginRender/>
+  <LoginMenu/>
+  <LogOutRender/>
+  <RegisterDone/>
+  </>
 };

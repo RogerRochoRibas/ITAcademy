@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import App from "./App";
-
-export const ShipRender = ({ Login, loadMoreShips, ships }) => {
+export const ShipRender = ({ loggedIn, loadMoreShips, ships }) => {
   React.useEffect(() => {
     loadMoreShips();
   }, []);
@@ -32,11 +31,14 @@ export const ShipRender = ({ Login, loadMoreShips, ships }) => {
   }
 
   const loading = <p>Loading...</p>;
-  const Logged = localStorage.getItem("loggedIn");
-    return (
-      <>
-        <h2 class="title">Spaceships</h2>
-        <ul className="starships">{ships.length > 0 ? shipList() : loading}</ul>
-      </>
-    );
+  if (loggedIn) {
+  return (
+    <>
+      <h2 class="title">Spaceships</h2>
+      <ul className="starships">{ships.length > 0 ? shipList() : loading}</ul>
+    </>
+  );}
+  if (!loggedIn) {
+    return (<p>You must login to see the Spaceships.</p>)
+  }
 };
