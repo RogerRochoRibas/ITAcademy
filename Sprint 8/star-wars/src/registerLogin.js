@@ -2,26 +2,28 @@ import React from "react";
 import classNames from "classnames";
 import App from "./App";
 
-export const RegisterLogin = ({ Login, UpdateLogin }) => {
-  const [errorName, setErrorName] = React.useState(null);
-  const [errorPassword, setErrorPassword] = React.useState(null);
-
+export const RegisterLogin = (props) => {
+  const [Logged, setLogged] = React.useState(false)
+  const [LoginScreen, setLoginScreen] = React.useState(false)
+  const [RegisterScreen, setRegisterScreen] = React.useState(false)
+  const [ErrorName, setErrorName] = React.useState(false)
+  const [ErrorPassword, setErrorPassword] = React.useState(false)
+  
   function logOut() {
     localStorage.setItem("loggedIn", false);
-    console.log("logout");
+    setLogged(false);
   }
 
-  function fromLoginToRegister() {
-    UpdateLogin("loginVisible", false);
-    UpdateLogin("registerVisible", true);
+  function changeRegisterLogin(register,login) {
+    setRegisterScreen(register);
+    setLoginScreen(login);
   }
 
-  async function fromRegisterToLogin() {
-    UpdateLogin("registerVisible", false);
+  async function RegistrationSuccess() {
     await new Promise((resolve) => {
       setTimeout(() => {
-        resolve(UpdateLogin("loginVisible", true));
-      }, 500);
+        resolve('alert("Registration completed");');
+      }, 5000);
     });
   }
 
@@ -52,24 +54,25 @@ export const RegisterLogin = ({ Login, UpdateLogin }) => {
     }
     if (correctName && correctPassword) {
       localStorage.setItem("loggedIn", true);
-      /*UpdateLogin("loggedIn", true);*/
-      UpdateLogin("loginVisible", false);
-      /*UpdateLogin('registerVisible', false);*/
+      setLogged(true);
+      setLoginScreen(false);
+      setRegisterScreen(false);
     }
   };
 
-  if (Login["registerVisible"]) {
+  if (RegisterScreen) {
     return (
       <div className="modal-bg">
         <div className="modal">
           <p
             className="modal-close"
-            onClick={() => UpdateLogin("registerVisible", false)}
+            onClick={() => setRegisterScreen(false)}
           >
             Close
           </p>
           <h2 class="title">SIGN UP</h2>
-          <div id="register">
+          <button onClick={() =>console.log('login: ', Logged,'LoginScreen: ',LoginScreen,'RegisterScreen: ',RegisterScreen)}>LogData</button>
+        <div id="register">
             <p>
               <label>
                 <input
@@ -101,7 +104,7 @@ export const RegisterLogin = ({ Login, UpdateLogin }) => {
           </div>
           <p>
             Already have an account?{" "}
-            <span className="link" onClick={() => fromRegisterToLogin()}>
+            <span className="link" onClick={() => changeRegisterLogin(true,false)}>
               Log In
             </span>
             .
@@ -111,23 +114,24 @@ export const RegisterLogin = ({ Login, UpdateLogin }) => {
     );
   }
 
-  if (Login["loginVisible"]) {
+  if (LoginScreen) {
     return (
       <div className="modal-bg">
         <div className="modal">
           <p
             className={"modal-close"}
-            onClick={() => UpdateLogin("loginVisible", false)}
+            onClick={() => setLoginScreen(false)}
           >
             Close
           </p>
           <h2 class="title">Login</h2>
-          <p>You must Log In to see the spaceships.</p>
+          <button onClick={()=>console.log('login: ', Logged,'LoginScreen: ',LoginScreen,'RegisterScreen: ',RegisterScreen,'Logged: ',Logged)}>LogData</button>
+        <p>You must Log In to see the spaceships.</p>
           <form id="login" onSubmit={checkUser}>
             <p>
               <label>
                 <input
-                  className={classNames({ error: errorName })}
+                  className={classNames({ error: ErrorName })}
                   type="text"
                   name="inputName"
                   id="inputName"
@@ -135,13 +139,13 @@ export const RegisterLogin = ({ Login, UpdateLogin }) => {
                 />
               </label>
             </p>
-            <p className={classNames("hide", { errorText: errorName })}>
+            <p className={classNames("hide", { errorText: ErrorName })}>
               Name not found.
             </p>
             <p>
               <label>
                 <input
-                  className={classNames({ error: errorPassword })}
+                  className={classNames({ error: ErrorPassword })}
                   type="text"
                   name="inputPassword"
                   id="inputPassword"
@@ -149,7 +153,7 @@ export const RegisterLogin = ({ Login, UpdateLogin }) => {
                 />
               </label>
             </p>
-            <p className={classNames("hide", { errorText: errorPassword })}>
+            <p className={classNames("hide", { errorText: ErrorPassword })}>
               Wrong password.
             </p>
             <p>
@@ -162,7 +166,7 @@ export const RegisterLogin = ({ Login, UpdateLogin }) => {
             </p>
             <p>
               Don't have an account?{" "}
-              <span className="link" onClick={() => fromLoginToRegister()}>
+              <span className="link" onClick={() => changeRegisterLogin(false,true)}>
                 SIGN UP
               </span>{" "}
               for free.
@@ -172,29 +176,30 @@ export const RegisterLogin = ({ Login, UpdateLogin }) => {
       </div>
     );
   }
-  if (!localStorage.getItem("loggedIn")) {
+  if (!Logged) {
     return (
       <>
         <div className="RegisterLogin">
           <p>
             <span
               className="clickable"
-              onClick={() => UpdateLogin("loginVisible", true)}
+              onClick={() => setLoginScreen(true)}
             >
               LOG IN
             </span>
             <span id="separator"> / / </span>
             <span
               className="clickable"
-              onClick={() => UpdateLogin("registerVisible", true)}
+              onClick={() => setRegisterScreen(true)}
             >
               SIGN UP
             </span>
           </p>
-        </div>
+          <button onClick={()=>console.log('login: ', Logged,'LoginScreen: ',LoginScreen,'RegisterScreen: ',RegisterScreen,'Logged: ',Logged)}>LogData</button>
+       </div>
       </>
     );
-  } else {
+  } if (Logged) {
     return (
       <>
         <div className="RegisterLogin">
@@ -203,7 +208,8 @@ export const RegisterLogin = ({ Login, UpdateLogin }) => {
             LOG OUT
           </p>
         </div>
-      </>
+        <button onClick={()=>console.log('login: ', Logged,'LoginScreen: ',LoginScreen,'RegisterScreen: ',RegisterScreen,'Logged: ',Logged)}>LogData</button>
+       </>
     );
   }
 };
