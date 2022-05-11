@@ -3,7 +3,7 @@ import classNames from "classnames";
 import App from "./App";
 
 export const RegisterLogin = (props) => {
-  const [Logged, setLogged] = React.useState(false);
+  const [Logged, setLogged] = React.useState(localStorage.getItem("loggedIn"));
   const [LoginScreen, setLoginScreen] = React.useState(false);
   const [RegisterScreen, setRegisterScreen] = React.useState(false);
   const [SuccessScreen, setSuccessScreen] = React.useState(false);

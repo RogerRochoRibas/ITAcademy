@@ -6,7 +6,7 @@ import { ShipRender } from "./spaceshipsList.js";
 import Welcome from "./welcome";
 import { RegisterLogin } from "./registerLogin";
 import logo from "./sw-logo.png";
-import { StarshipDetails } from "./starshipDetails";
+import { SpaceshipDetails } from "./spaceshipDetails";
 
 function App() {
   const [loggedIn, setLogedIn] = React.useState(localStorage.getItem("loggedIn"));
@@ -23,16 +23,18 @@ function App() {
           let newShips = [...ships];
           newShips.push(...ship.results);
           setShips(newShips);
-          console.log(ship.results[1].films)
         });
     }
   }
 
-  React.useEffect(()=>{
+  function init() {
     let loged = localStorage.getItem("loggedIn");
     if (loged) {
     setLogedIn(loged)}
-    console.log('loggedin: ',loggedIn,'loged: ',loged)
+  }
+
+  React.useEffect(()=>{
+    init();
   },[])
 
   return (
@@ -47,7 +49,7 @@ function App() {
 	    </ul>
       </div>
       <Routes>
-        <Route path="/starships/:name" element={<StarshipDetails loggedIn={loggedIn} ships={ships} loadMoreShips={loadMoreShips}/>}></Route>
+        <Route path="/starships/:name" element={<SpaceshipDetails loggedIn={loggedIn} ships={ships}  loadMoreShips={loadMoreShips}/>}></Route>
         <Route path="/" element={<Welcome />} />
         <Route path="app" element={<ShipRender loggedIn={loggedIn} ships={ships} loadMoreShips={loadMoreShips}/>}/>
       </Routes>

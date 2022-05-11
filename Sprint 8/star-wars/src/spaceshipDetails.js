@@ -1,8 +1,9 @@
 import React from "react";
 import { useParams } from 'react-router-dom';
 import App from "./App";
+import { SpaceshipPilots } from "./spaceshipPilots"
 
-export function StarshipDetails(props) {
+export function SpaceshipDetails(props) {
     const id = useParams();
     const idNumber = parseInt(id.name)-1;
     const imgNumber = parseInt(id.name)+5;
@@ -33,5 +34,6 @@ export function StarshipDetails(props) {
                         </tr>
                     </tbody>
                 </table>
+            <SpaceshipPilots loggedIn={props.loggedIn} ships={props.ships}/>
             </div>} else {return <p>You must Log In to see the starships.</p>}
 }

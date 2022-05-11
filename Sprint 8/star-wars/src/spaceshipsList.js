@@ -18,9 +18,12 @@ export const ShipRender = ({ loggedIn, loadMoreShips, ships }) => {
         return (
           <li key={index}>
             <Link to={`/starships/${parseInt(index) + 1}`}>
-              <div>
-                <h3 className="shipName ship">{element.name}</h3>
-                <h4 className="shipModel ship">{element.model}</h4>
+              <div className="ship-card">
+                <div className="ship">
+                <h3 className="shipName">{element.name}</h3>
+                <h4 className="shipModel">{element.model}</h4>
+                </div>
+                <img className="small-image" alt={element.name} src={`https://starwars-visualguide.com/assets/img/starships/${index+6}.jpg`}></img>
               </div>
             </Link>
           </li>

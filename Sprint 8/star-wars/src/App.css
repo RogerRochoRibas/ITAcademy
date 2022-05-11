@@ -91,7 +91,22 @@ header {
   text-align: left;
 }
 .ship {
-  margin: 7px;
+  margin: 7px ;
+  width: 50%;
+}
+.ship > h3,.ship > h4 {
+  margin:2px
+}
+
+.ship-card {
+  display:flex;
+  justify-content: space-between;
+}
+
+.small-image {
+  height: 80px;
+  width: auto;
+  right:0px;
 }
 
 input[type="text"]:focus {
