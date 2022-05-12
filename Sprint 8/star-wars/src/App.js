@@ -49,7 +49,7 @@ function App() {
 	    </ul>
       </div>
       <Routes>
-        <Route path="/starships/:name" element={<SpaceshipDetails loggedIn={loggedIn} ships={ships}  loadMoreShips={loadMoreShips}/>}></Route>
+        <Route path="/starships/:name" element={<SpaceshipDetails loggedIn={loggedIn} ships={ships} loadMoreShips={loadMoreShips}/>}></Route>
         <Route path="/" element={<Welcome />} />
         <Route path="app" element={<ShipRender loggedIn={loggedIn} ships={ships} loadMoreShips={loadMoreShips}/>}/>
       </Routes>

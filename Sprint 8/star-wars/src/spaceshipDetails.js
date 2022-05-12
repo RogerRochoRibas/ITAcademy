@@ -7,6 +7,7 @@ export function SpaceshipDetails(props) {
     const id = useParams();
     const idNumber = parseInt(id.name)-1;
     const imgNumber = parseInt(id.name)+5;
+    
     if (props.loggedIn) {
     return <div className='details'>
                 <h2 className='title'>{props.ships[idNumber].name}</h2>
@@ -34,6 +35,12 @@ export function SpaceshipDetails(props) {
                         </tr>
                     </tbody>
                 </table>
-            <SpaceshipPilots loggedIn={props.loggedIn} ships={props.ships}/>
+                
+            <table className="pilotTable">
+                <thead><th className='title'>Pilots</th></thead>
+                    <tbody>
+                        <SpaceshipPilots loggedIn={props.loggedIn} ships={props.ships} loadMoreShips={props.loadMoreShips}/>
+                    </tbody>
+                </table>
             </div>} else {return <p>You must Log In to see the starships.</p>}
 }

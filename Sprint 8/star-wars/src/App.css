@@ -129,9 +129,30 @@ input[type="text"] {
   text-transform: uppercase;
   line-height: 25.2px;
   text-align: center;
+  padding: 5px 18px;
+  margin-top: 14px;
+  margin-bottom: 18px;
+}
+
+.pilotname {
+  font-size: 23px;
+  font-weight: 100;
+  line-height: 25.2px;
+  text-align: center;
   padding: 0 18px;
   margin-top: 14px;
   margin-bottom: 18px;
+}
+
+.pilotTable {
+  margin-top:20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+tr {
+  background-color: #2e2e2e;
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .nav-log {
@@ -154,12 +175,17 @@ tbody {
 
 td {
   padding: 0 15px 0 15px;
+  width: 50%;
+}
+
+.tableSpace {
+  height:15px;
+  background-color: transparent;
 }
 
 .modal-bg {
   background-color: rgba(0, 0, 0, 0.405);
 }
-
 
 .full-screen {
   position: fixed;
