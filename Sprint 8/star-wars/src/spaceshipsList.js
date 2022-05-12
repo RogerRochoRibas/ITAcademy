@@ -20,10 +20,16 @@ export const ShipRender = ({ loggedIn, loadMoreShips, ships }) => {
             <Link to={`/starships/${parseInt(index) + 1}`}>
               <div className="ship-card">
                 <div className="ship">
-                <h3 className="shipName">{element.name}</h3>
-                <h4 className="shipModel">{element.model}</h4>
+                  <h3 className="shipName">{element.name}</h3>
+                  <h4 className="shipModel">{element.model}</h4>
                 </div>
-                <img className="small-image" alt={element.name} src={`https://starwars-visualguide.com/assets/img/starships/${index+6}.jpg`}></img>
+                <img
+                  className="small-image"
+                  alt={element.name}
+                  src={`https://starwars-visualguide.com/assets/img/starships/${
+                    index + 6
+                  }.jpg`}
+                ></img>
               </div>
             </Link>
           </li>
@@ -35,13 +41,14 @@ export const ShipRender = ({ loggedIn, loadMoreShips, ships }) => {
 
   const loading = <p>Loading...</p>;
   if (loggedIn) {
-  return (
-    <>
-      <h2 class="title">Spaceships</h2>
-      <ul className="starships">{ships.length > 0 ? shipList() : loading}</ul>
-    </>
-  );}
+    return (
+      <>
+        <h2 class="title">Spaceships</h2>
+        <ul className="starships">{ships.length > 0 ? shipList() : loading}</ul>
+      </>
+    );
+  }
   if (!loggedIn) {
-    return (<p>You must login to see the Spaceships.</p>)
+    return <p>You must login to see the Spaceships.</p>;
   }
 };

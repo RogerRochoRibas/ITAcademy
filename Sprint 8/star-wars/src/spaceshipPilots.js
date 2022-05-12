@@ -28,9 +28,10 @@ export function SpaceshipPilots(props) {
     if (pilotList.length > 0) {
       let pilotsMounted = pilotList.map((element, index) => {
         return (
-          <><tr className="tableSpace">
-            <td></td>
-          </tr>
+          <>
+            <tr className="tableSpace">
+              <td></td>
+            </tr>
             <tr className="pilotHead">
               <td>
                 <h3 className="pilotname">

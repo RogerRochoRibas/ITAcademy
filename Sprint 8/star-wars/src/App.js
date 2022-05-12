@@ -9,7 +9,9 @@ import logo from "./sw-logo.png";
 import { SpaceshipDetails } from "./spaceshipDetails";
 
 function App() {
-  const [loggedIn, setLogedIn] = React.useState(localStorage.getItem("loggedIn"));
+  const [loggedIn, setLogedIn] = React.useState(
+    localStorage.getItem("loggedIn")
+  );
   const [ships, setShips] = React.useState([]);
   const [next, setNext] = React.useState(
     "https://swapi.dev/api/starships/?page=1"
@@ -30,30 +32,58 @@ function App() {
   function init() {
     let loged = localStorage.getItem("loggedIn");
     if (loged) {
-    setLogedIn(loged)}
+      setLogedIn(loged);
+    }
   }
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     init();
-  },[])
+  }, []);
 
   return (
     <>
-    <Router className="App">
-      <header><img alt="logo" id="logo" src={logo} /></header>
-      <div><RegisterLogin loggedIn={loggedIn} setLogedIn={setLogedIn}/></div>
-	    <div class="nav">
-	    <ul>
-	      <li><Link to="/">Home</Link></li>
-	      <li><Link to='app'>Spaceships</Link></li>
-	    </ul>
-      </div>
-      <Routes>
-        <Route path="/starships/:name" element={<SpaceshipDetails loggedIn={loggedIn} ships={ships} loadMoreShips={loadMoreShips}/>}></Route>
-        <Route path="/" element={<Welcome />} />
-        <Route path="app" element={<ShipRender loggedIn={loggedIn} ships={ships} loadMoreShips={loadMoreShips}/>}/>
-      </Routes>
-    </Router></>
+      <Router className="App">
+        <header>
+          <img alt="logo" id="logo" src={logo} />
+        </header>
+        <div>
+          <RegisterLogin loggedIn={loggedIn} setLogedIn={setLogedIn} />
+        </div>
+        <div class="nav">
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="app">Spaceships</Link>
+            </li>
+          </ul>
+        </div>
+        <Routes>
+          <Route
+            path="/starships/:name"
+            element={
+              <SpaceshipDetails
+                loggedIn={loggedIn}
+                ships={ships}
+                loadMoreShips={loadMoreShips}
+              />
+            }
+          ></Route>
+          <Route path="/" element={<Welcome />} />
+          <Route
+            path="app"
+            element={
+              <ShipRender
+                loggedIn={loggedIn}
+                ships={ships}
+                loadMoreShips={loadMoreShips}
+              />
+            }
+          />
+        </Routes>
+      </Router>
+    </>
   );
 }
 

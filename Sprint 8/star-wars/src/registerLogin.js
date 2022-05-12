@@ -10,8 +10,6 @@ export const RegisterLogin = (props) => {
   const [ErrorName, setErrorName] = React.useState(false);
   const [ErrorPassword, setErrorPassword] = React.useState(false);
 
-  
-
   function logOut() {
     localStorage.setItem("loggedIn", false);
     setLogged(false);
@@ -211,11 +209,13 @@ export const RegisterLogin = (props) => {
       </div>
     );
   };
-  return <>
-  <RegisterRender/>
-  <LoginRender/>
-  <LoginMenu/>
-  <LogOutRender/>
-  <RegisterDone/>
-  </>
+  return (
+    <>
+      <RegisterRender />
+      <LoginRender />
+      <LoginMenu />
+      <LogOutRender />
+      <RegisterDone />
+    </>
+  );
 };
