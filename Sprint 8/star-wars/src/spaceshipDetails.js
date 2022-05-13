@@ -24,7 +24,7 @@ export function SpaceshipDetails(props) {
                 <p>Cost: {props.ships[idNumber].cost_in_credits}</p>
               </td>
               <td>
-                <p>Cargo: {props.ships[idNumber].cargo_capacity}</p>
+                <p>Manufacturer: {props.ships[idNumber].manufacturer}</p>
               </td>
             </tr>
             <tr>
@@ -32,7 +32,7 @@ export function SpaceshipDetails(props) {
                 <p>Lenght: {props.ships[idNumber].length}</p>
               </td>
               <td>
-                <p>Crew: {props.ships[idNumber].crew}</p>
+                <p>Cargo: {props.ships[idNumber].cargo_capacity}</p>
               </td>
             </tr>
             <tr>
@@ -40,7 +40,7 @@ export function SpaceshipDetails(props) {
                 <p>Passengers: {props.ships[idNumber].passengers}</p>
               </td>
               <td>
-                <p>Consumables: {props.ships[idNumber].consumables}</p>
+                <p>Crew: {props.ships[idNumber].crew}</p>
               </td>
             </tr>
             <tr>
@@ -56,17 +56,14 @@ export function SpaceshipDetails(props) {
                 </p>
               </td>
             </tr>
-            <tr>
-              <td>
-                <p>Manufacturer: {props.ships[idNumber].manufacturer}</p>
-              </td>
-            </tr>
           </tbody>
         </table>
 
         <table className="pilotTable">
           <thead>
-            <th className="title">Pilots</th>
+            <tr>
+              <th className="title">Pilots</th>
+            </tr>
           </thead>
           <tbody>
             <SpaceshipPilots
@@ -78,7 +75,9 @@ export function SpaceshipDetails(props) {
         </table>
         <table className="pilotTable">
           <thead>
-            <th className="title">Movies</th>
+            <tr>
+              <th className="title">Movies</th>
+            </tr>
           </thead>
           <tbody>
             <SpaceshipMovies

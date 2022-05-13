@@ -51,10 +51,10 @@ function App() {
         </div>
         <div class="nav">
           <ul>
-            <li>
+            <li key='home'>
               <Link to="/">Home</Link>
             </li>
-            <li>
+            <li key='Spaceships'>
               <Link to="app">Spaceships</Link>
             </li>
           </ul>
